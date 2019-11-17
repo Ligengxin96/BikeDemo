@@ -6,11 +6,34 @@ import './index.less';
 const { SubMenu } = Menu;
 
 class LeftNav extends Component {
-  componentWillMount() {
-    const menuNode = this.renderMenu(menuListDatas);
-    this.setState({ menuNode });
+  state={
+    rootSubmenuKeys: [],
+    openKeys: [],
   }
 
+  componentWillMount() {
+    const rootSubmenuKeys = [];
+    menuListDatas.forEach((item) => {
+      const { key, children } = item;
+      if (children) {
+        rootSubmenuKeys.push(key);
+      }
+    });
+    const menuNode = this.renderMenu(menuListDatas);
+    this.setState({ menuNode, rootSubmenuKeys });
+  }
+
+  onOpenChange = (openKey) => {
+    const { openKeys, rootSubmenuKeys } = this.state;
+    const latestOpenKey = openKey.find((key) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys: openKey });
+    } else {
+      this.setState({
+        openKeys: latestOpenKey ? [latestOpenKey] : [],
+      });
+    }
+  }
   // // 动态渲染菜单数据 感觉可行 但是点击菜单报错  Menu.item => 纠正 Menu.Item 就应该不会报错了
   // renderMenu = () => {
   //   const subMenuAry = [];
@@ -65,7 +88,7 @@ class LeftNav extends Component {
   }
 
   render() {
-    const { menuNode } = this.state;
+    const { menuNode, openKeys } = this.state;
     return (
       <Row>
         <Col span={6}>
@@ -77,6 +100,8 @@ class LeftNav extends Component {
         <Menu
           className="my-menu"
           mode="inline"
+          openKeys={openKeys}
+          onOpenChange={this.onOpenChange}
         >
           {menuNode}
         </Menu>
