@@ -11,7 +11,7 @@ class LeftNav extends Component {
     openKeys: [],
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const rootSubmenuKeys = [];
     menuListDatas.forEach((item) => {
       const { key, children } = item;

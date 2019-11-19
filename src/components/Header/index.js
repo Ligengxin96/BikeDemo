@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
-import { Row, Col, Divider } from 'antd';
+import { Row, Col, Divider, message } from 'antd';
 
 const axios = require('axios');
 
@@ -8,9 +8,10 @@ class Header extends Component {
   state={
     timer: null, // 定时器ID
     time: '--', // 当前时间
+    weather: {}, // 当前天气
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     // 获取当前时间
     const timer = setInterval(() => {
       const time = Moment().format('YYYY-MM-DD HH:mm:ss');
@@ -19,21 +20,15 @@ class Header extends Component {
     // 获取当前天气
     axios({
       method: 'GET',
-      url: 'https://weatherbit-v1-mashape.p.rapidapi.com/current',
-      headers: {
-        'content-type': 'application/octet-stream',
-        'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com',
-        'x-rapidapi-key': '9518a4c3d8msh4f36a632edcc6e5p133bfbjsn8ef4f2d91ece',
-      },
-      params: {
-        lang: 'cn',
-        lon: '104.07',
-        lat: '30.67',
-      },
+      url: 'https://free-api.heweather.net/s6/weather/now?location=成都&key=0aed2b33817345f6b949b560aa26b1f5',
     }).then((response) => {
-      console.log(response);
+      const { data: { HeWeather6 = [] } } = response;
+      if (HeWeather6.length > 0) {
+        const { now } = HeWeather6[0];
+        this.setState({ weather: now });
+      }
     }).catch((error) => {
-      console.log(error);
+      message.error(!error.success ? error.message : error.note);
     });
   }
 
@@ -43,13 +38,14 @@ class Header extends Component {
   }
 
   render() {
-    const { time } = this.state;
+    const { time, weather: { cond_txt } } = this.state;
     return (
       <>
         <Row>
           <Col>
             <div style={{ lineHeight: '3rem', display: 'flex', fontSize: '1.2rem', float: 'right' }}>
               <p>欢迎你,快乐风男</p>
+              {/* eslint-disable-next-line  */}
               <a style={{ padding: '0 1rem' }}>退出</a>
             </div>
           </Col>
@@ -62,7 +58,7 @@ class Header extends Component {
           <Col span={20}>
             <div style={{ lineHeight: '3rem', display: 'flex', fontSize: '1.2rem', float: 'right', marginRight: '1rem' }}>
               <p style={{ marginRight: '1rem' }}>{time}</p>
-              <p>晴转多云</p>
+              <p>{cond_txt}</p>
             </div>
           </Col>
         </Row>
