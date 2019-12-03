@@ -7,8 +7,9 @@ const { SubMenu } = Menu;
 
 class LeftNav extends Component {
   state={
-    rootSubmenuKeys: [],
-    openKeys: [],
+    rootSubmenuKeys: [], // 菜单数据
+    openKeys: [], // 当前展开的菜单
+    current: ['/home'], // 当前选中的菜单
   }
 
   UNSAFE_componentWillMount() {
@@ -23,6 +24,7 @@ class LeftNav extends Component {
     this.setState({ menuNode, rootSubmenuKeys });
   }
 
+  // 菜单展开回调
   onOpenChange = (openKey) => {
     const { openKeys, rootSubmenuKeys } = this.state;
     const latestOpenKey = openKey.find((key) => openKeys.indexOf(key) === -1);
@@ -32,6 +34,18 @@ class LeftNav extends Component {
       this.setState({
         openKeys: latestOpenKey ? [latestOpenKey] : [],
       });
+    }
+  }
+
+  // 菜单点击回调
+  handleClick = (e) => {
+    const { getMenuTitle } = this.props;
+    const { item: { props: { children = '' } } } = e;
+    this.setState({
+      current: e.key,
+    });
+    if (getMenuTitle && typeof getMenuTitle === 'function') {
+      getMenuTitle(children);
     }
   }
   // // 动态渲染菜单数据 感觉可行 但是点击菜单报错  Menu.item => 纠正 Menu.Item 就应该不会报错了
@@ -88,7 +102,7 @@ class LeftNav extends Component {
   }
 
   render() {
-    const { menuNode, openKeys } = this.state;
+    const { menuNode, openKeys, current } = this.state;
     return (
       <Row>
         <Col span={6}>
@@ -101,6 +115,8 @@ class LeftNav extends Component {
           className="my-menu"
           mode="inline"
           openKeys={openKeys}
+          selectedKeys={current}
+          onClick={this.handleClick}
           onOpenChange={this.onOpenChange}
         >
           {menuNode}

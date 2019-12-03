@@ -24,7 +24,7 @@ class Header extends Component {
     }).then((response) => {
       const { data: { HeWeather6 = [] } } = response;
       if (HeWeather6.length > 0) {
-        const { now } = HeWeather6[0];
+        const { now = '' } = HeWeather6[0];
         this.setState({ weather: now });
       }
     }).catch((error) => {
@@ -38,6 +38,7 @@ class Header extends Component {
   }
 
   render() {
+    const { menuTitle = '首页' } = this.props;
     const { time, weather: { cond_txt } } = this.state;
     return (
       <>
@@ -45,7 +46,6 @@ class Header extends Component {
           <Col>
             <div style={{ lineHeight: '3rem', display: 'flex', fontSize: '1.2rem', float: 'right' }}>
               <p>欢迎你,快乐风男</p>
-              {/* eslint-disable-next-line  */}
               <a style={{ padding: '0 1rem' }}>退出</a>
             </div>
           </Col>
@@ -53,10 +53,10 @@ class Header extends Component {
         <Divider style={{ margin: '0' }} />
         <Row>
           <Col span={4}>
-            <p style={{ lineHeight: '3rem', fontSize: '1.2rem', marginLeft: '2rem' }}>首页</p>
+            <span style={{ lineHeight: '3rem', fontSize: '1.2rem', marginLeft: '2rem' }}>{menuTitle}</span>
           </Col>
           <Col span={20}>
-            <div style={{ lineHeight: '3rem', display: 'flex', fontSize: '1.2rem', float: 'right', marginRight: '1rem' }}>
+            <div style={{ lineHeight: '2rem', display: 'flex', fontSize: '1.2rem', float: 'right', marginRight: '1rem' }}>
               <p style={{ marginRight: '1rem' }}>{time}</p>
               <p>{cond_txt}</p>
             </div>
