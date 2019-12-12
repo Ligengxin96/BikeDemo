@@ -8,12 +8,10 @@ import './style/common.less';
 
 class Admin extends Component {
   state={
-    menuTitle: '首页',
+    menuTitle: '首页', // 菜单标题
   }
 
-  /**
-   * 获取当前菜单标题
-   */
+  // 获取当前菜单标题
   getMenuTitle = (menuTitle) => {
     this.setState({ menuTitle });
   }
