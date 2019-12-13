@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Menu, Row, Col } from 'antd';
 import menuListDatas from '../config/menuConfig';
 import './index.less';
@@ -96,7 +97,7 @@ class LeftNav extends Component {
         );
       }
       return (
-        <Menu.Item title={title} key={key}>{title}</Menu.Item> //  Menu.Item 写成了 Menu.item 大小写问题 导致一直报错
+        <Menu.Item title={title} key={key}><NavLink to={key}>{title}</NavLink></Menu.Item> //  Menu.Item 写成了 Menu.item 大小写问题 导致一直报错
       );
     });
   }

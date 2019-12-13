@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import LeftNav from './components/LeftNav';
 import Header from './components/Header';
-import Content from './components/Content';
 import Footer from './components/Footer';
 import './style/common.less';
 
@@ -17,6 +16,7 @@ class Admin extends Component {
   }
 
   render() {
+    const { children } = this.props;
     const { menuTitle } = this.state;
     return (
       <Row className="container">
@@ -29,7 +29,7 @@ class Admin extends Component {
               <Header menuTitle={menuTitle} />
             </Col>
             <Col className="context">
-              <Content />
+              { children }
             </Col>
             <Col className="footer">
               <Footer />
