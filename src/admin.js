@@ -28,7 +28,7 @@ class Admin extends Component {
             <Col className="header">
               <Header menuTitle={menuTitle} />
             </Col>
-            <Col className="context">
+            <Col className="border">
               { children }
             </Col>
             <Col className="footer">
