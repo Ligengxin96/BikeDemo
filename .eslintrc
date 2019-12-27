@@ -8,8 +8,10 @@
     "es6": true
   },
   "rules": {
+    "spread": 0,
+    "restParams": 0,
     "react/state-in-constructor": [0],
-    "camelcase": 0, // 不使用强制驼峰
+    "camelcase": 0,
     "react/sort-comp": 0,
     "max-len": 0,
     "no-underscore-dangle": 0,
@@ -47,6 +49,7 @@
     "no-nested-ternary": [0],
     "no-loop-func": [0],
     "no-unused-expressions": "off",
+    "react/no-danger": 0,
     "no-mixed-operators": [
       "error",
       {
@@ -58,8 +61,7 @@
         ],
         "allowSamePrecedence": true
       }
-    ],
-    "react/no-danger": 0,
+    ]
   },
   "parserOptions": {
     "ecmaFeatures": {
