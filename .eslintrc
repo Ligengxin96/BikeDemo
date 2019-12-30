@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": "umi",
   "plugins": ["react"],
   "env": {
     "node": true,

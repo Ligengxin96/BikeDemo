@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Button, Row, Col } from 'antd';
-import styles from './index.module.less';
+import styles from './index.less';
 
 class Footer extends Component {
   render() {

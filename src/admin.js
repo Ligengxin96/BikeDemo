@@ -3,7 +3,7 @@ import { Row, Col } from 'antd';
 import LeftNav from './components/LeftNav';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import './style/common.less';
+import styles from './style/common.less';
 
 class Admin extends Component {
   state={
@@ -19,19 +19,19 @@ class Admin extends Component {
     const { children } = this.props;
     const { menuTitle } = this.state;
     return (
-      <Row className="container">
-        <Col span={3} className="leftNva">
+      <Row className={styles.container}>
+        <Col span={3} className={styles.leftNva}>
           <LeftNav getMenuTitle={this.getMenuTitle} />
         </Col>
-        <Col span={21} className="main">
+        <Col span={21} className={styles.main}>
           <Row>
-            <Col className="header">
+            <Col className={styles.header}>
               <Header menuTitle={menuTitle} />
             </Col>
-            <Col className="border">
+            <Col className={styles.border}>
               { children }
             </Col>
-            <Col className="footer">
+            <Col className={styles.footer}>
               <Footer />
             </Col>
           </Row>
