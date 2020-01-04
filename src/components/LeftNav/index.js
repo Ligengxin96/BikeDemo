@@ -28,7 +28,7 @@ class LeftNav extends Component {
   // 菜单展开回调
   onOpenChange = (openKey) => {
     const { openKeys, rootSubmenuKeys } = this.state;
-    const latestOpenKey = openKey.find((key) => openKeys.indexOf(key) === -1);
+    const latestOpenKey = openKey.find(key => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       this.setState({ openKeys: openKey });
     } else {

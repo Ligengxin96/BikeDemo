@@ -14,15 +14,22 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "babel-plugin-dva-hmr": "^0.3.2",
-    "eslint": "^4.14.0",
-    "eslint-config-umi": "^0.1.1",
-    "eslint-plugin-flowtype": "^2.34.1",
-    "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
-    "husky": "^0.12.0",
-    "redbox-react": "^1.4.3",
-    "roadhog": "^2.5.0-beta.4"
+    "babel-plugin-dva-hmr": "0.4.2",
+    "eslint": "4.14.0",
+    "babel-plugin-import": "1.12.2",
+    "eslint-config-airbnb": "16.0.0",
+    "eslint-plugin-babel": "5.1.0",
+    "eslint-plugin-flowtype": "2.49.3",
+    "eslint-plugin-import": "2.12.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.9.1",
+    "babel-eslint": "10.0.3",
+    "lint-staged": "7.2.2",
+    "mockjs": "1.1.0",
+    "redbox-react": "1.6.0",
+    "roadhog": "^2.5.0-beta.4",
+    "roadhog-api-doc": "1.1.2",
+    "stylelint": "9.5.0",
+    "stylelint-config-standard": "19.0.0"
   }
 }

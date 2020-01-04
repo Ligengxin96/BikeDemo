@@ -41,7 +41,7 @@ class Header extends Component {
     const { menuTitle = '首页' } = this.props;
     const { time, weather: { cond_txt } } = this.state;
     return (
-      <>
+      <React.Fragment>
         <Row>
           <Col>
             <div style={{ lineHeight: '3rem', display: 'flex', fontSize: '1.2rem', float: 'right' }}>
@@ -62,7 +62,7 @@ class Header extends Component {
             </div>
           </Col>
         </Row>
-      </>
+      </React.Fragment>
     );
   }
 }
