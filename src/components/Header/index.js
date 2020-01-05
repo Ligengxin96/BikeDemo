@@ -28,7 +28,7 @@ class Header extends Component {
         this.setState({ weather: now });
       }
     }).catch((error) => {
-      message.error(!error.success ? error.message : error.note);
+      message.error(error);
     });
   }
 
@@ -53,7 +53,9 @@ class Header extends Component {
         <Divider style={{ margin: '0' }} />
         <Row>
           <Col span={4}>
-            <span style={{ lineHeight: '3rem', fontSize: '1.2rem', marginLeft: '2rem' }}>{menuTitle}</span>
+            <p style={{ lineHeight: '3rem', fontSize: '1.2rem', marginLeft: '-8rem', position: 'relative', textAlign: 'center' }} >{menuTitle}
+              <div style={{ borderTop: '9px solid #fff', borderLeft: '12px solid transparent', borderRight: '12px solid transparent', top: '3.6rem', left: '47%', position: 'absolute', zIndex: 99 }} />
+            </p>
           </Col>
           <Col span={20}>
             <div style={{ lineHeight: '2rem', display: 'flex', fontSize: '1.2rem', float: 'right', marginRight: '1rem' }}>

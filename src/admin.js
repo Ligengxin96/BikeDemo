@@ -7,7 +7,7 @@ import styles from './style/common.less';
 
 class Admin extends Component {
   state={
-    menuTitle: '首页', // 菜单标题
+    menuTitle: <a href="#/home">首页</a>, // 菜单标题
   }
 
   // 获取当前菜单标题
