@@ -1,4 +1,5 @@
 import fetch from 'dva/fetch';
+import qs from 'querystring';
 
 function parseJSON(response) {
   return response.json();
@@ -14,6 +15,21 @@ function checkStatus(response) {
   throw error;
 }
 
+function handleHeaders(options) {
+  const headers = options.headers = options.headers ? options.headers : {}; // eslint-disable-line
+  const defaultHeaders = {
+    'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  };
+  options.headers = Object.assign({}, defaultHeaders, headers); // eslint-disable-line
+
+  if (options.method === 'post') {
+    let body = options.body ? options.body : {};
+    body = qs.stringify(body);
+    options.body = body; // eslint-disable-line
+  }
+}
+
+
 /**
  * Requests a URL, returning a promise.
  *
@@ -21,7 +37,14 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options) {
+export default function request(url, options = {}) {
+  // get
+  if (!options.method) {
+    url += `?${qs.stringify(options.params)}`; // eslint-disable-line
+  }
+  // 处理头部
+  handleHeaders(options);
+
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
