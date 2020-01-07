@@ -51,7 +51,8 @@ class Header extends Component {
     }).then((response) => {
       const { data: { HeWeather6 = [] } } = response;
       if (HeWeather6.length > 0) {
-        const { now: { cond_txt = '--' } } = HeWeather6[0];
+        const { now } = HeWeather6[0];
+        const { cond_txt = '--' } = now || {};
         this.setState({ weather: cond_txt });
       }
     }).catch((error) => {

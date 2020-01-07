@@ -3,6 +3,7 @@ import { Router, Route, Switch, Redirect } from 'dva/router';
 import Login from './components/Login';
 import Home from './components/Content';
 import Buttons from './components/Admin/UI/Buttons';
+import Modals from './components/Admin/UI/Modals';
 import Admin from './admin';
 import NoFound from './components/ErrorPages/404';
 import App from './App';
@@ -21,6 +22,7 @@ function RouterConfig({ history }) {
                   <Switch>
                     <Route path="/home" component={Home} />
                     <Route path="/ui/buttons" component={Buttons} />
+                    <Route path="/ui/modals" component={Modals} />
                     <Redirect to="/home" />
                   </Switch>
                 </Admin>
