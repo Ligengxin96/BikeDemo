@@ -49,7 +49,7 @@ class Buttons extends Component {
   render() {
     const { visible, visible1, visible2, visible3, visible4 } = this.state;
     const modalProps = { // 个人喜好,封装的弹框确认和取消按钮水平居中的
-      title: '自己封装的弹框',
+      title: '自己封装的弹框组件',
       visible,
       onOk: () => this.handleOk('visible'),
       onCancel: () => this.handleCancel('visible'),
@@ -91,7 +91,7 @@ class Buttons extends Component {
               <Button type="primary" onClick={() => this.handleShowModal('visible2')}>自定义页脚弹窗</Button>
               <Button type="primary" onClick={() => this.handleShowModal('visible3')}>距离顶部20px弹窗</Button>
               <Button type="primary" onClick={() => this.handleShowModal('visible4')}>水平垂直居中弹窗</Button>
-              <Button type="danger" onClick={() => this.handleShowModal('visible')}>自己封装的弹窗</Button>
+              <Button type="danger" onClick={() => this.handleShowModal('visible')}>自己封装的弹窗组件</Button>
             </div>
           </Card>
           <Card title="信息确认框" className={styles.myCard}>

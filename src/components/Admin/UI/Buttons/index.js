@@ -64,10 +64,10 @@ class Buttons extends Component {
               <Radio value="default">中</Radio>
               <Radio value="large">大</Radio>
             </Radio.Group>
-            <Button type="primary" size={size}>Imooc</Button>
-            <Button size={size}>Imooc</Button>
-            <Button type="dashed" size={size}>Imooc</Button>
-            <Button type="danger" size={size}>Imooc</Button>
+            <Button type="primary" size={size}>Primary</Button>
+            <Button size={size}>Normal</Button>
+            <Button type="dashed" size={size}>Dashed</Button>
+            <Button type="danger" size={size}>Danger</Button>
           </div>
         </Card>
       </div>
