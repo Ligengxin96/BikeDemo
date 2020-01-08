@@ -3,7 +3,7 @@ import { Card, Button, Modal, message } from 'antd';
 import MyModal from '../../../myComponents/myModal';
 import styles from '../../../../style/common.less';
 
-class Buttons extends Component {
+class Modals extends Component {
   state={
     visible: false, // 自己封装的弹框
     visible1: false, // 基础弹框
@@ -113,4 +113,4 @@ class Buttons extends Component {
   }
 }
 
-export default Buttons;
+export default Modals;
