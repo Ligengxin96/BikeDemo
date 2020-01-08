@@ -20,21 +20,15 @@ class Admin extends Component {
     const { menuTitle } = this.state;
     return (
       <Row className={styles.container}>
-        <Col span={3} className={styles.leftNva}>
+        <Col span={4} className={styles.leftNva}>
           <LeftNav getMenuTitle={this.getMenuTitle} />
         </Col>
-        <Col span={21} className={styles.main}>
-          <Row>
-            <Col className={styles.header}>
-              <Header menuTitle={menuTitle} />
-            </Col>
-            <Col className={styles.border}>
-              { children }
-            </Col>
-            <Col className={styles.footer}>
-              <Footer />
-            </Col>
+        <Col span={20} className={styles.main}>
+          <Header menuTitle={menuTitle} />
+          <Row className={styles.content}>
+            {children}
           </Row>
+          <Footer />
         </Col>
       </Row>
     );

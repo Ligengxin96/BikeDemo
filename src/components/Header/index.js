@@ -51,8 +51,8 @@ class Header extends Component {
     }).then((response) => {
       const { data: { HeWeather6 = [] } } = response;
       if (HeWeather6.length > 0) {
-        const { now } = HeWeather6[0];
-        const { cond_txt = '--' } = now || {};
+        const { now = {} } = HeWeather6[0];
+        const { cond_txt = '--' } = now;
         this.setState({ weather: cond_txt });
       }
     }).catch((error) => {
@@ -64,10 +64,10 @@ class Header extends Component {
     const { time, weather } = this.state;
     const { menuTitle = '首页', user: { users: { city = '北京', name } } } = this.props;
     return (
-      <React.Fragment>
+      <div style={{ backgroundColor: '#fff' }}>
         <Row>
           <Col>
-            <div style={{ lineHeight: '3rem', display: 'flex', fontSize: '1.2rem', float: 'right' }}>
+            <div style={{ display: 'flex', fontSize: '1.2rem', float: 'right' }}>
               <p>欢迎你,{name}</p>
               <a style={{ padding: '0 1rem' }}>退出</a>
             </div>
@@ -76,8 +76,8 @@ class Header extends Component {
         <Divider style={{ margin: '0' }} />
         <Row>
           <Col span={4}>
-            <p style={{ lineHeight: '3rem', fontSize: '1.2rem', marginLeft: '-8rem', position: 'relative', textAlign: 'center' }} >{menuTitle}
-              <div style={{ borderTop: '9px solid #fff', borderLeft: '12px solid transparent', borderRight: '12px solid transparent', top: '3.6rem', left: '47%', position: 'absolute', zIndex: 99 }} />
+            <p style={{ fontSize: '1.2rem', marginLeft: '-8rem', position: 'relative', textAlign: 'center' }} >{menuTitle}
+              <div style={{ borderTop: '9px solid #fff', borderLeft: '12px solid transparent', borderRight: '12px solid transparent', top: '3.2rem', left: '47%', position: 'absolute', zIndex: 99 }} />
             </p>
           </Col>
           <Col span={20}>
@@ -87,7 +87,7 @@ class Header extends Component {
             </div>
           </Col>
         </Row>
-      </React.Fragment>
+      </div>
     );
   }
 }

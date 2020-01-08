@@ -1,40 +1,56 @@
+// .container{
+//     .leftNva{
+//         height: calc(100vh);
+//     }
+//     .main{
+//         padding: 0 1rem;
+//         height: calc(100vh);
+//     }
+//     .header{
+//         height: calc(10vh);
+//     }
+//     .context{
+//         height: calc(80vh);
+//         display: flex; // 弹性盒子模型
+//         align-items: center; // 垂直居中
+//         justify-content: center; // 左右居中
+//     }
+//     .border{
+//         height: calc(80vh);
+//         border: 2rem solid #f1f3f5;
+//         box-sizing: border-box;
+//         margin-top: 2rem;
+//     }
+//     .footer{
+//         height: calc(5vh);
+//         display: flex; // 弹性盒子模型
+//         align-items: center; // 垂直居中
+//         justify-content: center; // 左右居中
+//         background-color:#f1f3f5;
+//     }
+// }
+
 .container{
     .leftNva{
+        color: #ffffff;
         height: calc(100vh);
     }
     .main{
-        padding: 0 1rem;
         height: calc(100vh);
+        background-color: #f1f3f5;
+        overflow: auto;
     }
-    .header{
-        height: calc(10vh);
-    }
-    .context{
-        height: calc(80vh);
-        display: flex; // 弹性盒子模型
-        align-items: center; // 垂直居中
-        justify-content: center; // 左右居中
-    }
-    .border{
-        height: calc(80vh);
-        border: 2rem solid #ddd;
-        box-sizing: border-box;
-        margin-top: 2rem;
-    }
-    .footer{
-        height: calc(5vh);
-        display: flex; // 弹性盒子模型
-        align-items: center; // 垂直居中
-        justify-content: center; // 左右居中
-        background-color:#ddd;
+    .content{
+        position: relative;
+        padding: 20px;
     }
 }
 
 .myCard{
-    border-bottom: .5rem solid #ddd !important;
-    border-left: 0rem solid #ddd !important;
-    border-right: 0rem solid #ddd !important;
-    border-top: 0rem solid #ddd !important;
+    border-bottom: .5rem solid #f1f3f5 !important;
+    border-left: 0rem solid #f1f3f5 !important;
+    border-right: 0rem solid #f1f3f5 !important;
+    border-top: 0rem solid #f1f3f5 !important;
       :global(.ant-card-head){
           font-weight: 600 !important;
           color: black !important;

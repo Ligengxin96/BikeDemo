@@ -42,6 +42,13 @@ class LeftNav extends Component {
   handleClick = (e) => {
     const { getMenuTitle } = this.props;
     const { item: { props: { children = '' } } } = e;
+
+    // 如果点击了首页 收起别的展开菜单 不然样式有点难看
+    if (e.key === '/home') {
+      this.setState({
+        openKeys: [],
+      });
+    }
     this.setState({
       current: e.key,
     });
@@ -49,6 +56,7 @@ class LeftNav extends Component {
       getMenuTitle(children);
     }
   }
+
   // // 动态渲染菜单数据 感觉可行 但是点击菜单报错  Menu.item => 纠正 Menu.Item 就应该不会报错了
   // renderMenu = () => {
   //   const subMenuAry = [];
