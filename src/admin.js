@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
-import LeftNav from './components/LeftNav';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import LeftNav from './routes/LeftNav';
+import Header from './routes/Header';
+import Footer from './routes/Footer';
 import styles from './style/common.less';
 
 class Admin extends Component {

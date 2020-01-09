@@ -1,12 +1,13 @@
 
+import lodash from 'lodash';
 import { fetchUser } from '../services/example';
 
 export default {
 
-  namespace: 'user',
+  namespace: 'userModel',
 
   state: {
-    users: {}, // 用户信息
+    user: {}, // 用户信息
   },
 
   subscriptions: {
@@ -17,20 +18,18 @@ export default {
   effects: {
     *fetchUser({ payload }, { call, put }) {  // eslint-disable-line
       const result = yield call(fetchUser, payload);
-      const { data = {} } = result;
-      if (data) {
-        yield put({
-          type: 'save',
-          payload: data,
-        });
-      }
+      const user = lodash.get(result, 'data.users', {});
+      yield put({
+        type: 'save',
+        payload: user,
+      });
     },
 
   },
 
   reducers: {
     save(state, action) {
-      return { ...state, ...action.payload };
+      return { ...state, user: action.payload };
     },
   },
 

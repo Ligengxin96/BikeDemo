@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import lodash from 'lodash';
 import Moment from 'moment';
-import { connect } from 'dva';
+
 import { Row, Col, Divider, message } from 'antd';
 
 const axios = require('axios');
@@ -24,7 +25,7 @@ class Header extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      const { user: { users: { city = '北京' } } } = this.props;
+      const city = lodash.get(this.props, 'userModel.user.city', '北京');
       this.fetchWeather(city);
     }, 300);
   }
@@ -39,7 +40,7 @@ class Header extends Component {
   fetchUser = () => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'user/fetchUser',
+      type: 'userModel/fetchUser',
     });
   }
 
@@ -49,12 +50,8 @@ class Header extends Component {
       method: 'GET',
       url: `https://free-api.heweather.net/s6/weather/now?location=${city}&key=0aed2b33817345f6b949b560aa26b1f5`,
     }).then((response) => {
-      const { data: { HeWeather6 = [] } } = response;
-      if (HeWeather6.length > 0) {
-        const { now = {} } = HeWeather6[0];
-        const { cond_txt = '--' } = now;
-        this.setState({ weather: cond_txt });
-      }
+      const weather = lodash.get(response, 'data.HeWeather6[0].now.cond_txt', '--');
+      this.setState({ weather });
     }).catch((error) => {
       message.error(error);
     });
@@ -62,7 +59,8 @@ class Header extends Component {
 
   render() {
     const { time, weather } = this.state;
-    const { menuTitle = '首页', user: { users: { city = '北京', name } } } = this.props;
+    const { menuTitle = '首页' } = this.props;
+    const { city = '北京', name } = lodash.get(this.props, 'userModel.user', {});
     return (
       <div style={{ backgroundColor: '#fff' }}>
         <Row>
@@ -92,10 +90,4 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(Header);
+export default Header;
