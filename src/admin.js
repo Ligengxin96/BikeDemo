@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'dva';
 import { Row, Col } from 'antd';
 import LeftNav from './routes/LeftNav';
 import Header from './routes/Header';
@@ -6,28 +7,22 @@ import Footer from './routes/Footer';
 import styles from './style/common.less';
 
 class Admin extends Component {
-  state={
-    menuTitle: <a href="#/home">首页</a>, // 菜单标题
-  }
-
-  // 获取当前菜单标题
-  getMenuTitle = (menuTitle) => {
-    this.setState({ menuTitle });
-  }
-
   render() {
-    const { children } = this.props;
-    const { menuTitle } = this.state;
+    const { children, dispatch, menuTitle } = this.props;
     return (
       <Row className={styles.container}>
         <Col span={4} className={styles.leftNva}>
-          <LeftNav getMenuTitle={this.getMenuTitle} />
+          {/* 左侧菜单栏部分 */}
+          <LeftNav dispatch={dispatch} />
         </Col>
         <Col span={20} className={styles.main}>
+          {/* 头部组件部分 */}
           <Header menuTitle={menuTitle} />
           <Row className={styles.content}>
+            {/* 中间内容部分 */}
             {children}
           </Row>
+          {/* 页脚组件部分 */}
           <Footer />
         </Col>
       </Row>
@@ -35,4 +30,6 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default connect(({ leftNavModel }) => ({
+  menuTitle: leftNavModel.menuTitle,
+}))(Admin);

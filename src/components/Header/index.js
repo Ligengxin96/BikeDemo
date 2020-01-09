@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'dva/router';
 import lodash from 'lodash';
 import Moment from 'moment';
 
@@ -16,7 +17,7 @@ class Header extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.fetchUser();
+    this.fetchUserInformation();
     const timer = setInterval(() => {
       const time = Moment().format('YYYY-MM-DD HH:mm:ss'); // 获取当前时间
       this.setState({ timer, time });
@@ -37,10 +38,10 @@ class Header extends Component {
   }
 
   // 获取模拟的用户数据
-  fetchUser = () => {
+  fetchUserInformation = () => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'userModel/fetchUser',
+      type: 'userModel/fetchUserInformation',
     });
   }
 
@@ -59,7 +60,7 @@ class Header extends Component {
 
   render() {
     const { time, weather } = this.state;
-    const { menuTitle = '首页' } = this.props;
+    const { url = '/home', title = '首页' } = lodash.get(this.props, 'menuTitle', {});
     const { city = '北京', name } = lodash.get(this.props, 'userModel.user', {});
     return (
       <div style={{ backgroundColor: '#fff' }}>
@@ -74,7 +75,7 @@ class Header extends Component {
         <Divider style={{ margin: '0' }} />
         <Row>
           <Col span={4}>
-            <p style={{ fontSize: '1.2rem', marginLeft: '-8rem', position: 'relative', textAlign: 'center' }} >{menuTitle}
+            <p style={{ fontSize: '1.2rem', marginLeft: '-8rem', position: 'relative', textAlign: 'center' }} ><Link to={url}>{title}</Link>
               <div style={{ borderTop: '9px solid #fff', borderLeft: '12px solid transparent', borderRight: '12px solid transparent', top: '3.2rem', left: '47%', position: 'absolute', zIndex: 99 }} />
             </p>
           </Col>

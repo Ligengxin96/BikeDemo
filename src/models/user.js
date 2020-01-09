@@ -16,20 +16,21 @@ export default {
   },
 
   effects: {
-    *fetchUser({ payload }, { call, put }) {  // eslint-disable-line
+    *fetchUserInformation({ payload }, { call, put }) {  // eslint-disable-line
       const result = yield call(fetchUser, payload);
       const user = lodash.get(result, 'data.users', {});
       yield put({
         type: 'save',
-        payload: user,
+        payload: {
+          user,
+        },
       });
     },
-
   },
 
   reducers: {
     save(state, action) {
-      return { ...state, user: action.payload };
+      return { ...state, ...action.payload };
     },
   },
 

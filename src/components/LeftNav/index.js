@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import lodash from 'lodash';
 import { NavLink } from 'react-router-dom';
 import { Menu, Row, Col } from 'antd';
-import menuListDatas from '../config/menuConfig';
+import menuListDatas from '../../assets/config/menuConfig';
 import './index.less';
 
 const { SubMenu } = Menu;
@@ -40,9 +41,13 @@ class LeftNav extends Component {
 
   // 菜单点击回调
   handleClick = (e) => {
-    const { getMenuTitle } = this.props;
-    const { item: { props: { children = '' } } } = e;
-
+    const { dispatch } = this.props;
+    const url = lodash.get(e, 'key', '/home');
+    const title = lodash.get(e, 'item.props.title', '首页');
+    const menuTitle = {
+      url,
+      title,
+    };
     // 如果点击了首页 收起别的展开菜单 不然样式有点难看
     if (e.key === '/home') {
       this.setState({
@@ -52,9 +57,10 @@ class LeftNav extends Component {
     this.setState({
       current: e.key,
     });
-    if (getMenuTitle && typeof getMenuTitle === 'function') {
-      getMenuTitle(children);
-    }
+    dispatch({
+      type: 'leftNavModel/getMenuTitle',
+      payload: menuTitle,
+    });
   }
 
   // // 动态渲染菜单数据 感觉可行 但是点击菜单报错  Menu.item => 纠正 Menu.Item 就应该不会报错了
