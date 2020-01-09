@@ -86,6 +86,8 @@ class GlobalMessage extends Component {
   }
 
   render() {
+    const { param = {} } = this.props;
+    const { showHide = false } = param;
     return (
       <div>
         <Card title="通知提醒框" className={styles.myCard}>
@@ -104,15 +106,18 @@ class GlobalMessage extends Component {
             <Button type="primary" onClick={() => this.openNotification('error', 'bottomRight')}>下来</Button>
           </div>
         </Card>
-        <Card title="全局提示框" className={styles.myCard}>
-          <div className={styles.btnList}>
-            <Button type="primary" onClick={() => this.showMessage('success')}>不</Button>
-            <Button type="primary" onClick={() => this.showMessage('info')}>学习</Button>
-            <Button type="primary" onClick={() => this.showMessage('warning')}>是</Button>
-            <Button type="primary" onClick={() => this.showMessage('error')}>不行</Button>
-            <Button type="primary" onClick={() => this.showMessage('loading')}>的</Button>
-          </div>
-        </Card>
+        {
+          showHide && (
+            <Card title="全局提示框" className={styles.myCard}>
+              <div className={styles.btnList}>
+                <Button type="primary" onClick={() => this.showMessage('success')}>不</Button>
+                <Button type="primary" onClick={() => this.showMessage('info')}>学习</Button>
+                <Button type="primary" onClick={() => this.showMessage('warning')}>是</Button>
+                <Button type="primary" onClick={() => this.showMessage('error')}>不行</Button>
+                <Button type="primary" onClick={() => this.showMessage('loading')}>的</Button>
+              </div>
+            </Card>)
+        }
       </div>
     );
   }

@@ -1,3 +1,5 @@
+const Base64 = require('js-base64').Base64;
+
 const menuList = [
   {
     title: '首页',
@@ -25,7 +27,7 @@ const menuList = [
       },
       {
         title: '全局Message',
-        key: '/ui/messages',
+        key: `/ui/messages/${Base64.encode(JSON.stringify({ showHide: true }))}`,
       },
       {
         title: 'Tab页签',

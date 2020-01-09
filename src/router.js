@@ -2,12 +2,12 @@ import React from 'react';
 import { Router, Route, Switch, Redirect } from 'dva/router';
 import App from './App';
 import Admin from './admin';
-import Login from './components/Login';
-import Home from './components/Content';
-import Buttons from './components/Admin/UI/Buttons';
-import Modals from './components/Admin/UI/Modals';
-import Spins from './components/Admin/UI/Spins';
-import GlobalMessage from './components/Admin/UI/GlobalMessage';
+import Login from './routes/Login';
+import Home from './routes/Content';
+import Buttons from './routes/Admin/UI/Buttons';
+import Modals from './routes/Admin/UI/Modals';
+import Spins from './routes/Admin/UI/Spins';
+import GlobalMessage from './routes/Admin/UI/GlobalMessage';
 import NoFound from './components/ErrorPages/404';
 
 function RouterConfig({ history }) {
@@ -26,8 +26,8 @@ function RouterConfig({ history }) {
                     <Route path="/ui/buttons" component={Buttons} />
                     <Route path="/ui/modals" component={Modals} />
                     <Route path="/ui/loadings" component={Spins} />
-                    <Route path="/ui/notification" component={GlobalMessage} />
-                    <Route path="/ui/messages" component={GlobalMessage} />
+                    <Route path="/ui/notification" exact component={GlobalMessage} />
+                    <Route path="/ui/messages/:queryParams" exact component={GlobalMessage} />
                     <Redirect to="/home" />
                   </Switch>
                 </Admin>
