@@ -31,7 +31,7 @@ const menuList = [
       },
       {
         title: 'Tab页签',
-        key: '/ui/tabs',
+        key: '/ui/tabs/tab',
       },
       {
         title: '图片画廊',

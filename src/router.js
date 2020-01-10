@@ -8,6 +8,7 @@ import Buttons from './routes/Admin/UI/Buttons';
 import Modals from './routes/Admin/UI/Modals';
 import Spins from './routes/Admin/UI/Spins';
 import GlobalMessage from './routes/Admin/UI/GlobalMessage';
+import Tab from './routes/Admin/UI/Tab';
 import NoFound from './components/ErrorPages/404';
 
 function RouterConfig({ history }) {
@@ -26,8 +27,9 @@ function RouterConfig({ history }) {
                     <Route path="/ui/buttons" component={Buttons} />
                     <Route path="/ui/modals" component={Modals} />
                     <Route path="/ui/loadings" component={Spins} />
-                    <Route path="/ui/notification" exact component={GlobalMessage} />
-                    <Route path="/ui/messages/:queryParams" exact component={GlobalMessage} />
+                    <Route path="/ui/notification" component={GlobalMessage} />
+                    <Route path="/ui/messages/:queryParams" component={GlobalMessage} />
+                    <Route path="/ui/tabs/:queryParams" component={Tab} />
                     <Redirect to="/home" />
                   </Switch>
                 </Admin>

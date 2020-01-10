@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'dva/router';
 import lodash from 'lodash';
 import Moment from 'moment';
-
 import { Row, Col, Divider, message } from 'antd';
 
 const axios = require('axios');
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      timer: null, // 定时器ID
-      time: '--', // 当前时间
-    };
-  }
+  state = {
+    timer: null, // 定时器ID
+    time: '--', // 当前时间
+  };
 
   UNSAFE_componentWillMount() {
     this.fetchUserInformation();
