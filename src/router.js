@@ -9,6 +9,7 @@ import Modals from './routes/Admin/UI/Modals';
 import Spins from './routes/Admin/UI/Spins';
 import GlobalMessage from './routes/Admin/UI/GlobalMessage';
 import Tab from './routes/Admin/UI/Tab';
+import Gallery from './routes/Admin/UI/Gallery';
 import NoFound from './components/ErrorPages/404';
 
 function RouterConfig({ history }) {
@@ -30,6 +31,7 @@ function RouterConfig({ history }) {
                     <Route path="/ui/notification" component={GlobalMessage} />
                     <Route path="/ui/messages/:queryParams" component={GlobalMessage} />
                     <Route path="/ui/tabs/:queryParams" component={Tab} />
+                    <Route path="/ui/gallery" component={Gallery} />
                     <Redirect to="/home" />
                   </Switch>
                 </Admin>

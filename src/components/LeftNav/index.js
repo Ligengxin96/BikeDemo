@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import lodash from 'lodash';
 import { NavLink } from 'react-router-dom';
-import { Menu, Row, Col } from 'antd';
+import { Menu, Row, Col, message } from 'antd';
 import menuListDatas from '../../assets/config/menuConfig';
 import './index.less';
 
@@ -10,7 +10,7 @@ const { SubMenu } = Menu;
 class LeftNav extends Component {
   state={
     theme: 'light', // 菜单主题颜色 'light' 或者 'dark'
-    mode: 'vertical', // 菜单类型 antd支持三种类型: 垂直: vertical | 水平: horizontal | 内嵌: inline
+    mode: 'inline', // 菜单类型 antd支持三种类型: 垂直: vertical | 水平: horizontal | 内嵌: inline
     rootSubmenuKeys: [], // 菜单数据
     openKeys: [], // 当前展开的菜单
     current: ['/home'], // 当前选中的菜单
@@ -30,7 +30,8 @@ class LeftNav extends Component {
 
   // 点击图标文字改变菜单类型
   changeMenuMode = (oldMode) => {
-    const mode = oldMode === 'vertical' ? 'inline' : 'vertical';
+    const mode = oldMode === 'inline' ? 'vertical' : 'inline';
+    message.info(`已切换菜单模式为${mode === 'inline' ? '内嵌' : '垂直'}`);
     this.setState({ mode });
   }
 
