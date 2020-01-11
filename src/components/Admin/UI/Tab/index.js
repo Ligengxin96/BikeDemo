@@ -21,17 +21,17 @@ class Tab extends React.Component {
     const tabPanes = [
       {
         title: 'Tab 1',
-        content: 'Tab 1',
+        content: <p style={{ fontSize: '1.2rem' }}>My Project</p>,
         key: '1',
       },
       {
         title: 'Tab 2',
-        content: 'Tab 2',
+        content: <p style={{ fontSize: '1.2rem' }}>My Demo</p>,
         key: '2',
       },
       {
         title: 'Tab 3',
-        content: 'Tab 3',
+        content: <p style={{ fontSize: '1.2rem' }}>My style</p>,
         key: '3',
       },
     ];
@@ -67,7 +67,11 @@ class Tab extends React.Component {
   add = () => {
     const { newTabIndex, tabPanes } = this.state;
     const activeKey = (newTabIndex + 1).toString();
-    tabPanes.push({ title: `newTab ${activeKey}`, content: 'New Tab Pane', key: activeKey });
+    tabPanes.push({
+      title: `newTab ${activeKey}`,
+      content: <p style={{ fontSize: '1.2rem' }}>{activeKey === '4' ? 'dva 爱你哟' : 'New Tab Pane'}</p>,
+      key: activeKey,
+    });
     this.setState({
       tabPanes,
       activeKey,
