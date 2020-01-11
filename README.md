@@ -1,5 +1,5 @@
 # BikeDemo
-- maste r分支 是用 Create React App 创建的项目(后项目采用dva框架后切换到了dev分支)
+- master 分支 是用 Create React App 创建的项目(后项目采用dva框架后切换到了dev分支)
 - dev 分支是基于dva框架,使用React,ES6和Antd组件搭建的项目
 
 ## 项目主要文件夹介绍
