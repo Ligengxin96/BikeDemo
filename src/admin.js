@@ -8,10 +8,10 @@ import styles from './style/common.less';
 
 class Admin extends Component {
   render() {
-    const { children, dispatch, menuTitle } = this.props;
+    const { children, dispatch, menuTitle, menuTheme } = this.props;
     return (
       <Row className={styles.container}>
-        <Col span={4} className={styles.leftNva}>
+        <Col span={4} className={styles.leftNva} style={{ backgroundColor: menuTheme === 'dark' ? '#001529' : '#FFFFFF' }} >
           {/* 左侧菜单栏部分 */}
           <LeftNav dispatch={dispatch} />
         </Col>
@@ -32,4 +32,5 @@ class Admin extends Component {
 
 export default connect(({ leftNavModel }) => ({
   menuTitle: leftNavModel.menuTitle,
+  menuTheme: leftNavModel.menuTheme,
 }))(Admin);

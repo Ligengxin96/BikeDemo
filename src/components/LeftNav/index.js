@@ -9,6 +9,8 @@ const { SubMenu } = Menu;
 
 class LeftNav extends Component {
   state={
+    theme: 'light', // 菜单主题颜色 'light' 或者 'dark'
+    mode: 'vertical', // 菜单类型 antd支持三种类型: 垂直: vertical | 水平: horizontal | 内嵌: inline
     rootSubmenuKeys: [], // 菜单数据
     openKeys: [], // 当前展开的菜单
     current: ['/home'], // 当前选中的菜单
@@ -24,6 +26,23 @@ class LeftNav extends Component {
     });
     const menuNode = this.renderMenu(menuListDatas);
     this.setState({ menuNode, rootSubmenuKeys });
+  }
+
+  // 点击图标文字改变菜单类型
+  changeMenuMode = (oldMode) => {
+    const mode = oldMode === 'vertical' ? 'inline' : 'vertical';
+    this.setState({ mode });
+  }
+
+  // 点击MyBike文字改变主题
+  changeMenuTheme = (oldTheme) => {
+    const { dispatch } = this.props;
+    const theme = oldTheme === 'light' ? 'dark' : 'light';
+    this.setState({ theme });
+    dispatch({
+      type: 'leftNavModel/getMenuTheme',
+      payload: theme,
+    });
   }
 
   // 菜单展开回调
@@ -117,25 +136,28 @@ class LeftNav extends Component {
   }
 
   render() {
-    const { menuNode, openKeys, current } = this.state;
+    const { menuNode, openKeys, theme, mode, current } = this.state;
     return (
       <Row>
-        <Col span={6}>
+        <Col span={6} onClick={() => this.changeMenuMode(mode)}>
           <img src="assets/logo-ant.svg" style={{ width: '4rem', padding: '1rem 0 0 1rem' }} alt="" />
         </Col>
-        <Col span={12}>
-          <h1 style={{ color: '#25c1ff', padding: '1rem' }}>MyBike</h1>
+        <Col span={12} onClick={() => this.changeMenuTheme(theme)}>
+          <h1 style={{ color: '#25c1ff', padding: '1rem', cursor: 'pointer' }}>MyBike</h1>
         </Col>
-        <Menu
-          className="my-menu"
-          mode="inline"
-          openKeys={openKeys}
-          selectedKeys={current}
-          onClick={this.handleClick}
-          onOpenChange={this.onOpenChange}
-        >
-          {menuNode}
-        </Menu>
+        <Col span={24}>
+          <Menu
+            className="my-menu"
+            mode={mode}
+            theme={theme}
+            openKeys={openKeys}
+            selectedKeys={current}
+            onClick={this.handleClick}
+            onOpenChange={this.onOpenChange}
+          >
+            {menuNode}
+          </Menu>
+        </Col>
       </Row>
     );
   }
