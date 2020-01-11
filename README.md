@@ -1,5 +1,5 @@
 # BikeDemo
-- master分支 是用 Create React App 创建的项目(后项目采用dva框架后切换到了dev分支)
+- maste r分支 是用 Create React App 创建的项目(后项目采用dva框架后切换到了dev分支)
 - dev 分支是基于dva框架,使用React,ES6和Antd组件搭建的项目
 
 ## 项目主要文件夹介绍
@@ -18,7 +18,6 @@
 │ ├── App.js         # 入口文件顶级路由组件
 │ ├── router.js      # 路由配置
 │ ├── index.js       # 入口文件
-│ └── index.ejs      # html模版文件
 ├── package.json     # 项目依赖包信息
 ├── .eslintrc        # Eslint配置文件
 └── .webpackrc       # roadhog配置
