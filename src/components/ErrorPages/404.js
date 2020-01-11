@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NoFound from '../../../public/assets/404.png';
 
-class Footer extends Component {
+class ErrorPage404 extends Component {
   render() {
     return (
       <p style={{ textAlign: 'center' }}><img src={NoFound} alt="" /></p>
@@ -9,4 +9,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+export default ErrorPage404;
