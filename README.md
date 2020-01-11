@@ -25,10 +25,14 @@
 
 ## 开发环境搭建
 
+推荐使用cnpm 安装依赖包
+如果使用 yarn 安装依赖包可能会导致 [启动报错缺失crypto-browserify](https://github.com/Ligengxin96/BikeDemo/issues/1)
+
 ```bash
 $ git clone https://github.com/Ligengxin96/BikeDemo.git
 $ cd BikeDemo
 $ git checkout dev
-$ cnpm install      # 如果使用 yarn 安装依赖包可能会导致 [启动报错缺失 crypto-browserify](https://github.com/Ligengxin96/BikeDemo/issues/1)
+$ cnpm install      
 $ npm start
 ```
+
