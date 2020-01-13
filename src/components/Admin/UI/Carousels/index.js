@@ -9,9 +9,9 @@ class Carousels extends React.Component {
       <React.Fragment>
         <Card title="文字背景轮播" className={styles.myCard}>
           <Carousel autoplay className={carouselStyle.myCarousels}>
+            <div><h3>Antd</h3></div>
             <div><h3>Dva</h3></div>
             <div><h3>React</h3></div>
-            <div><h3>Antd</h3></div>
           </Carousel>
         </Card>
         <Card title="文字背景轮播(fade动画效果)" className={styles.myCard}>

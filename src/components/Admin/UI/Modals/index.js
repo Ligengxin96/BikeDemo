@@ -14,11 +14,13 @@ class Modals extends Component {
 
   // 弹框确认按钮点击事件
   handleOk = (visible) => {
+    message.info('点击了确定按钮');
     this.setState({ [visible]: false });
   }
 
   // 弹框取消按钮点击事件
   handleCancel = (visible) => {
+    message.info('点击了取消(关闭)按钮');
     this.setState({ [visible]: false });
   }
 

@@ -12,6 +12,7 @@ export default {
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
+
     },
   },
 
@@ -23,6 +24,14 @@ export default {
         type: 'save',
         payload: {
           user,
+        },
+      });
+    },
+    *setUserInformation({ payload }, { call, put }) {  // eslint-disable-line
+      yield put({
+        type: 'save',
+        payload: {
+          user: payload,
         },
       });
     },

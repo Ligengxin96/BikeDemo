@@ -11,6 +11,8 @@ import GlobalMessage from './routes/Admin/UI/GlobalMessage';
 import Tab from './routes/Admin/UI/Tab';
 import Gallery from './routes/Admin/UI/Gallery';
 import Carousels from './routes/Admin/UI/Carousels';
+import LoginForm from './routes/Admin/UI/Forms/login';
+import RegisterForm from './routes/Admin/UI/Forms/register';
 import NoFound from './components/ErrorPages/404';
 
 function RouterConfig({ history }) {
@@ -26,14 +28,16 @@ function RouterConfig({ history }) {
                 <Admin>
                   <Switch>
                     <Route path="/home" component={Home} />
-                    <Route path="/ui/buttons" component={Buttons} />
-                    <Route path="/ui/modals" component={Modals} />
-                    <Route path="/ui/loadings" component={Spins} />
-                    <Route path="/ui/notification" component={GlobalMessage} />
-                    <Route path="/ui/messages/:queryParams" component={GlobalMessage} />
-                    <Route path="/ui/tabs/:queryParams" component={Tab} />
-                    <Route path="/ui/gallery" component={Gallery} />
-                    <Route path="/ui/carousel" component={Carousels} />
+                    <Route path="/admin/ui/buttons" component={Buttons} />
+                    <Route path="/admin/ui/modals" component={Modals} />
+                    <Route path="/admin/ui/loadings" component={Spins} />
+                    <Route path="/admin/ui/notification" component={GlobalMessage} />
+                    <Route path="/admin/ui/messages/:queryParams" component={GlobalMessage} />
+                    <Route path="/admin/ui/tabs/:queryParams" component={Tab} />
+                    <Route path="/admin/ui/gallery" component={Gallery} />
+                    <Route path="/admin/ui/carousel" component={Carousels} />
+                    <Route path="/admin/form/login" component={LoginForm} />
+                    <Route path="/admin/form/register" component={RegisterForm} />
                     <Redirect to="/home" />
                   </Switch>
                 </Admin>
