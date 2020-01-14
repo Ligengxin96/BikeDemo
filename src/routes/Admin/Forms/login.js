@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import LoginFormComponent from '../../../../components/Admin/UI/Forms/login';
+import LoginFormComponent from '../../../components/Admin/Forms/login';
 
 class LoginForm extends Component {
   render() {

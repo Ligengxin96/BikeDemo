@@ -11,8 +11,8 @@ import GlobalMessage from './routes/Admin/UI/GlobalMessage';
 import Tab from './routes/Admin/UI/Tab';
 import Gallery from './routes/Admin/UI/Gallery';
 import Carousels from './routes/Admin/UI/Carousels';
-import LoginForm from './routes/Admin/UI/Forms/login';
-import RegisterForm from './routes/Admin/UI/Forms/register';
+import LoginForm from './routes/Admin/Forms/login';
+import RegisterForm from './routes/Admin/Forms/register';
 import NoFound from './components/ErrorPages/404';
 
 function RouterConfig({ history }) {

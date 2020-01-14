@@ -3,9 +3,9 @@ import Moment from 'moment';
 import lodash from 'lodash';
 import { routerRedux } from 'dva/router';
 import { Card, Col, Form, Button, Input, Checkbox, Radio, Select, Switch, DatePicker, TimePicker, Upload, Icon, message, InputNumber, Cascader } from 'antd';
-import cascaderDatas from '../../../../assets/config/cascaderDatas';
-import MyModal from '../../../myComponents/myModal';
-import styles from '../../../../style/common.less';
+import cascaderDatas from '../../../assets/config/cascaderDatas';
+import MyModal from '../../myComponents/myModal';
+import styles from '../../../style/common.less';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;

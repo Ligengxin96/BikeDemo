@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import RegisterFormComponent from '../../../../components/Admin/UI/Forms/register';
+import RegisterFormComponent from '../../../components/Admin/Forms/register';
 
 class RegisterForm extends Component {
   render() {
