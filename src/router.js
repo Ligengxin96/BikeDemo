@@ -13,6 +13,8 @@ import Gallery from './routes/Admin/UI/Gallery';
 import Carousels from './routes/Admin/UI/Carousels';
 import LoginForm from './routes/Admin/Forms/Login';
 import RegisterForm from './routes/Admin/Forms/Register';
+import BasicTable from './routes/Admin/Tables/BasicTable';
+import AdvancedTable from './routes/Admin/Tables/AdvancedTable';
 import NoFound from './components/ErrorPages/404';
 
 function RouterConfig({ history }) {
@@ -38,6 +40,9 @@ function RouterConfig({ history }) {
                     <Route path="/admin/ui/carousel" component={Carousels} />
                     <Route path="/admin/form/login" component={LoginForm} />
                     <Route path="/admin/form/register" component={RegisterForm} />
+                    <Route path="/admin/table/basic" component={BasicTable} />
+                    <Route path="/admin/table/basic" component={BasicTable} />
+                    <Route path="/admin/table/advanced" component={AdvancedTable} />
                     <Redirect to="/home" />
                   </Switch>
                 </Admin>

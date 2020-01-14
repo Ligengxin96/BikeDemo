@@ -1,4 +1,6 @@
 import fetch from 'dva/fetch';
+import lodash from 'lodash';
+import axios from 'axios';
 import qs from 'querystring';
 
 function parseJSON(response) {
@@ -50,4 +52,37 @@ export default function request(url, options = {}) {
     .then(parseJSON)
     .then(data => ({ data }))
     .catch(err => ({ err }));
+}
+
+/**
+ * 自己简单封装的请求,考虑的情况很少,只为请求模拟数据
+ */
+export function myRequest(options) {
+  const { url = '', params = {}, method = 'post' } = options;
+  const baseURL = 'https://mock.yonyoucloud.com/mock/3501/myBike/api';
+  return new Promise((resolve, reject) => {
+    axios({
+      url,
+      baseURL,
+      method,
+      params,
+      timeout: 10000,
+    }).then((response) => {
+      const { code = 0, note = '', result = [] } = lodash.get(response, 'data', {});
+      if (lodash.get(response, 'status', '') === 200) {
+        if (code > 0) {
+          resolve({ code, note, result });
+        } else {
+          reject(note);
+        }
+      } else {
+        reject(note);
+      }
+    }).catch((error) => {
+      const note = '网络异常';
+      console.info('error', error); // eslint-disable-line
+      // reject(error);
+      reject(note);
+    });
+  });
 }
