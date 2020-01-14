@@ -14,7 +14,7 @@
 │ ├── /style/        # 全局样式
 │ ├── /utils/        # 工具函数
 │ │ ├── request.js   # 异步请求函数
-| | |── /api/        # 接口配置文件
+| | |── /api/        # 接口配置
 │ ├── admin.js       # 入口文件次级路由组件
 │ ├── App.js         # 入口文件顶级路由组件
 │ ├── router.js      # 路由配置
@@ -36,4 +36,3 @@ $ git checkout dev
 $ cnpm install      
 $ npm start
 ```
-
