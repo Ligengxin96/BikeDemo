@@ -14,13 +14,14 @@
 │ ├── /style/        # 全局样式
 │ ├── /utils/        # 工具函数
 │ │ ├── request.js   # 异步请求函数
+│ │ ├── /api/        # 接口配置
 │ ├── admin.js       # 入口文件次级路由组件
 │ ├── App.js         # 入口文件顶级路由组件
 │ ├── router.js      # 路由配置
 │ ├── index.js       # 入口文件
 ├── package.json     # 项目依赖包信息
 ├── .eslintrc        # Eslint配置文件
-└── .webpackrc       # roadhog配置
+└── .webpackrc       # webpackrc配置文件
 ```
 
 ## 开发环境搭建
@@ -35,4 +36,3 @@ $ git checkout dev
 $ cnpm install      
 $ npm start
 ```
-
