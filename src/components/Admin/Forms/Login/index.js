@@ -2,7 +2,7 @@ import React from 'react';
 import lodash from 'lodash';
 import { routerRedux } from 'dva/router';
 import { Card, Form, Input, Button, message, Icon, Checkbox } from 'antd';
-import styles from '../../../style/common.less';
+import styles from '../../../../style/common.less';
 
 const FormItem = Form.Item;
 

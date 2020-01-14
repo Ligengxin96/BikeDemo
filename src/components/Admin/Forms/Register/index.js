@@ -3,9 +3,9 @@ import Moment from 'moment';
 import lodash from 'lodash';
 import { routerRedux } from 'dva/router';
 import { Card, Col, Form, Button, Input, Checkbox, Radio, Select, Switch, DatePicker, TimePicker, Upload, Icon, message, InputNumber, Cascader } from 'antd';
-import cascaderDatas from '../../../assets/config/cascaderDatas';
-import MyModal from '../../myComponents/myModal';
-import styles from '../../../style/common.less';
+import cascaderDatas from '../../../../assets/config/cascaderDatas';
+import MyModal from '../../../myComponents/myModal';
+import styles from '../../../../style/common.less';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -28,7 +28,12 @@ class FormRegister extends React.Component {
 
   // 注册按钮点击回调
   registerSubmit = () => {
-    const { form: { validateFieldsAndScroll }, dispatch } = this.props;
+    const { form: { validateFieldsAndScroll, getFieldValue }, dispatch } = this.props;
+    const registerBtnDisabled = getFieldValue('userBook'); // 是否禁用注册按钮(是否勾选阅读过用户手册)
+    if (!registerBtnDisabled) {
+      message.info('请阅读用户手册,并点击我已阅读');
+      return;
+    }
     validateFieldsAndScroll((error, values) => {
       if (error) {
         const key = Object.keys(error);
@@ -90,8 +95,7 @@ class FormRegister extends React.Component {
 
   render() {
     const { loading, userImage, visible } = this.state;
-    const { form: { getFieldDecorator, getFieldValue } } = this.props;
-    const registerBtnDisabled = getFieldValue('userBook'); // 是否禁用注册按钮(是否勾选阅读过用户手册)
+    const { form: { getFieldDecorator } } = this.props;
 
     // 表单内(一个FormItem)也具有栅格系统
     const formItemLayout = {
@@ -273,7 +277,7 @@ class FormRegister extends React.Component {
               </FormItem>
 
               <FormItem {...offsetLayout}>
-                <Button type="primary" onClick={this.registerSubmit} disabled={!registerBtnDisabled}>注册</Button>
+                <Button type="primary" onClick={this.registerSubmit} >注册</Button>
               </FormItem>
 
             </Form>

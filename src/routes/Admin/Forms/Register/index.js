@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import LoginFormComponent from '../../../components/Admin/Forms/login';
+import RegisterFormComponent from '../../../../components/Admin/Forms/Register';
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
   render() {
     const { user, dispatch } = this.props;
     return (
-      <LoginFormComponent user={user} dispatch={dispatch} />
+      <RegisterFormComponent user={user} dispatch={dispatch} />
     );
   }
 }
 
 export default connect(({ userModel }) => ({
   user: userModel.user,
-}))(LoginForm);
+}))(RegisterForm);
