@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'dva';
 import BasicTableComponent from '../../../../components/Admin/Tables/BasicTable';
 
 class BasicTable extends Component {
   render() {
+    const { dictionary } = this.props;
     return (
-      <BasicTableComponent />
+      <BasicTableComponent dictionary={dictionary} />
     );
   }
 }
 
-export default BasicTable;
+export default connect(({ globalModel }) => ({
+  dictionary: globalModel.dictionary,
+}))(BasicTable);

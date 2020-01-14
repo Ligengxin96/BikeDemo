@@ -7,6 +7,24 @@ export default {
 
   state: {
     hasAuth: 0, // 用户是否登录 0.否 | 1.是
+    dictionary: { // 数据字典(没有接口...只能自己写死)
+      status: [{
+        ibm: 1,
+        note: '咸鱼',
+      }, {
+        ibm: 2,
+        note: '菜鸡',
+      }, {
+        ibm: 3,
+        note: '努力奋斗',
+      }, {
+        ibm: 4,
+        note: '技术巅峰',
+      }, {
+        ibm: 5,
+        note: '创业者',
+      }],
+    },
   },
 
   subscriptions: {

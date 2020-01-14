@@ -81,7 +81,6 @@ class FormRegister extends React.Component {
     reader.readAsDataURL(img);
   }
 
-
   // 打开彩蛋弹窗
   showEasterEgg = () => {
     this.setState({ visible: true });
@@ -95,7 +94,8 @@ class FormRegister extends React.Component {
 
   render() {
     const { loading, userImage, visible } = this.state;
-    const { form: { getFieldDecorator } } = this.props;
+    const { form: { getFieldDecorator }, dictionary } = this.props;
+    const { status: statusAry } = dictionary;
 
     // 表单内(一个FormItem)也具有栅格系统
     const formItemLayout = {
@@ -191,14 +191,14 @@ class FormRegister extends React.Component {
               <FormItem label="当前状态" {...formItemLayout}>
                 {
                   getFieldDecorator('status', {
-                    initialValue: '2',
+                    initialValue: 2,
                   })( // eslint-disable-line
                     <Select>
-                      <Option value="1">咸鱼</Option>
-                      <Option value="2">菜鸡</Option>
-                      <Option value="3">努力奋斗</Option>
-                      <Option value="4">技术巅峰</Option>
-                      <Option value="5">创业者</Option>
+                      {
+                        statusAry.map((item) => {
+                          return <Option value={item.ibm} >{item.note}</Option>;
+                        })
+                      }
                     </Select>
                   ) // eslint-disable-line
                 }
