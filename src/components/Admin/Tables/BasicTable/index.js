@@ -179,6 +179,7 @@ class BasicTable extends Component {
       <React.Fragment>
         <Card title="基础表格" className={styles.myCard}>
           <Table
+            rowKey="id"
             loading={basicLoading}
             columns={this.getColumns()}
             dataSource={basicDataSource}

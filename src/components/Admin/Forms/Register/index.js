@@ -88,7 +88,7 @@ class FormRegister extends React.Component {
 
   // 关闭弹窗
   handleCancel = () => {
-    message.info('GL HF!');
+    message.info(<span>GL HF!&nbsp;<Icon type="smile" theme="twoTone" /></span>);
     this.setState({ visible: false });
   }
 
