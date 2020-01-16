@@ -8,12 +8,16 @@ import './index.less';
 const { SubMenu } = Menu;
 
 class LeftNav extends Component {
-  state={
-    theme: 'light', // 菜单主题颜色 'light' 或者 'dark'
-    mode: 'inline', // 菜单类型 antd支持三种类型: 垂直: vertical | 水平: horizontal | 内嵌: inline
-    rootSubmenuKeys: [], // 菜单数据
-    openKeys: [], // 当前展开的菜单
-    current: ['/home'], // 当前选中的菜单
+  constructor(props) {
+    super(props);
+    const { menuTitle: { url }, menuTheme } = props;
+    this.state = {
+      theme: menuTheme, // 菜单主题颜色 'light' 或者 'dark'
+      mode: 'inline', // 菜单类型 antd支持三种类型: 垂直: vertical | 水平: horizontal | 内嵌: inline
+      rootSubmenuKeys: [], // 菜单数据
+      openKeys: [], // 当前展开的菜单
+      current: [url], // 当前选中的菜单
+    };
   }
 
   UNSAFE_componentWillMount() {

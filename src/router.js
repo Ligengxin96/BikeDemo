@@ -1,4 +1,6 @@
 import React from 'react';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
 import { Router, Route, Switch, Redirect } from 'dva/router';
 import App from './App';
 import Admin from './admin';
@@ -17,41 +19,44 @@ import BasicTable from './routes/Admin/Tables/BasicTable';
 import AdvancedTable from './routes/Admin/Tables/AdvancedTable';
 import NoFound from './components/ErrorPages/404';
 
+
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
-      <App>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route
-            path="/"
-            render={() => {
-              return (
-                <Admin>
-                  <Switch>
-                    <Route path="/home" component={Home} />
-                    <Route path="/admin/ui/buttons" component={Buttons} />
-                    <Route path="/admin/ui/modals" component={Modals} />
-                    <Route path="/admin/ui/loadings" component={Spins} />
-                    <Route path="/admin/ui/notification" component={GlobalMessage} />
-                    <Route path="/admin/ui/messages/:queryParams" component={GlobalMessage} />
-                    <Route path="/admin/ui/tabs/:queryParams" component={Tab} />
-                    <Route path="/admin/ui/gallery" component={Gallery} />
-                    <Route path="/admin/ui/carousel" component={Carousels} />
-                    <Route path="/admin/form/login" component={LoginForm} />
-                    <Route path="/admin/form/register" component={RegisterForm} />
-                    <Route path="/admin/table/basic" component={BasicTable} />
-                    <Route path="/admin/table/basic" component={BasicTable} />
-                    <Route path="/admin/table/advanced" component={AdvancedTable} />
-                    <Redirect to="/home" />
-                  </Switch>
-                </Admin>
-              );
-            }}
-          />
-          <Route component={NoFound} />
-        </Switch>
-      </App>
+      <ConfigProvider locale={zhCN}>
+        <App>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route
+              path="/"
+              render={() => {
+                return (
+                  <Admin>
+                    <Switch>
+                      <Route path="/home" component={Home} />
+                      <Route path="/admin/ui/buttons" component={Buttons} />
+                      <Route path="/admin/ui/modals" component={Modals} />
+                      <Route path="/admin/ui/loadings" component={Spins} />
+                      <Route path="/admin/ui/notification" component={GlobalMessage} />
+                      <Route path="/admin/ui/messages/:queryParams" component={GlobalMessage} />
+                      <Route path="/admin/ui/tabs/:queryParams" component={Tab} />
+                      <Route path="/admin/ui/gallery" component={Gallery} />
+                      <Route path="/admin/ui/carousel" component={Carousels} />
+                      <Route path="/admin/form/login" component={LoginForm} />
+                      <Route path="/admin/form/register" component={RegisterForm} />
+                      <Route path="/admin/table/basic" component={BasicTable} />
+                      <Route path="/admin/table/basic" component={BasicTable} />
+                      <Route path="/admin/table/advanced" component={AdvancedTable} />
+                      <Redirect to="/home" />
+                    </Switch>
+                  </Admin>
+                );
+              }}
+            />
+            <Route component={NoFound} />
+          </Switch>
+        </App>
+      </ConfigProvider>
     </Router>
   );
 }

@@ -50,7 +50,7 @@ class Header extends Component {
       const weather = lodash.get(response, 'data.HeWeather6[0].now.cond_txt', '--');
       this.setState({ weather });
     }).catch((error) => {
-      message.error(error);
+      message.error(error.message);
     });
   }
 

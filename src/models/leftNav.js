@@ -1,3 +1,4 @@
+import menuListDatas from '../assets/config/menuConfig';
 
 export default {
 
@@ -8,12 +9,30 @@ export default {
       url: '/home',
       title: '首页',
     },
-    menuTheme: 'light', // 菜单主题
+    menuTheme: 'dark', // 菜单主题
   },
+
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
-
+      const findCurrentUrlTitle = (datas) => {
+        const menuTitle = {};
+        datas.forEach((item) => {
+          const { title, key, children } = item;
+          if (children) {
+            return findCurrentUrlTitle(children);
+          }
+          if (history.location.pathname === key) {
+            menuTitle.url = key;
+            menuTitle.title = title;
+            dispatch({
+              type: 'getMenuTitle',
+              payload: menuTitle,
+            });
+          }
+        });
+      };
+      findCurrentUrlTitle(menuListDatas);
     },
   },
 

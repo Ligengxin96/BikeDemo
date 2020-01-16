@@ -3,9 +3,9 @@ import LeftNavComponent from '../../components/LeftNav';
 
 class LeftNav extends Component {
   render() {
-    const { dispatch } = this.props;
+    const { menuTitle, menuTheme, dispatch } = this.props;
     return (
-      <LeftNavComponent dispatch={dispatch} />
+      <LeftNavComponent menuTitle={menuTitle} menuTheme={menuTheme} dispatch={dispatch} />
     );
   }
 }

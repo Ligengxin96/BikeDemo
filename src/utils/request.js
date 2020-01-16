@@ -68,10 +68,10 @@ export function myRequest(options) {
       params,
       timeout: 10000,
     }).then((response) => {
-      const { code = 0, note = '', result = [] } = lodash.get(response, 'data', {});
+      const { code = 0, note = '', result = [], total = 0 } = lodash.get(response, 'data', {});
       if (lodash.get(response, 'status', '') === 200) {
         if (code > 0) {
-          resolve({ code, note, result });
+          resolve({ code, note, result, total });
         } else {
           reject(note);
         }
@@ -79,10 +79,9 @@ export function myRequest(options) {
         reject(note);
       }
     }).catch((error) => {
-      const note = '网络异常';
       console.info('error', error); // eslint-disable-line
       // reject(error);
-      reject(note);
+      reject(error.message);
     });
   });
 }

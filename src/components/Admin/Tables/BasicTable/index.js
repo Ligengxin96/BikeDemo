@@ -6,28 +6,67 @@ import styles from '../../../../style/common.less';
 
 class BasicTable extends Component {
   state={
-    loading: false,
-    dataSource: [],
+    basicLoading: false, // 基础表格loading
+    mutilLoading: false, // 多(单)选表格loading
+    basicDataSource: [], // 基础表格数据源
+    mutilDataSource: [], // 多(单)选表格数据源
+    selectedDatas: { // 多(单)表格selectDatas
+      selectedRowKeys: [],
+      selectedRows: [],
+      selectedAll: false,
+    },
+    pagination: {
+      current: 1,
+      pageSize: 5,
+      total: 0,
+    },
   }
 
   componentDidMount() {
-    this.fetchTableData();
+    this.fetchBasicTableData();
+    this.fetchSingleTableData();
   }
 
   // 获取表格数据
-  fetchTableData = () => {
-    this.setState({ loading: true });
-    fetchCustomer({}).then((response) => {
+  fetchBasicTableData = () => {
+    this.setState({ basicLoading: true });
+    fetchCustomer({
+      limit: 1, // limit: 返回数量限制, 1.5条 | 2.105条
+    }).then((response) => {
       const { code, result } = response;
       if (code > 0) {
         this.setState({
-          loading: false,
-          dataSource: result,
+          basicLoading: false,
+          basicDataSource: result,
         });
       }
     }).catch((error) => {
       message.error(error);
-      this.setState({ loading: false });
+      this.setState({ basicLoading: false });
+    });
+  }
+
+  // 获取表格数据
+  fetchSingleTableData = () => {
+    this.setState({ mutilLoading: true });
+    const { pagination } = this.props;
+    fetchCustomer({
+      limit: 2, // limit: 返回数量限制, 1.5条 | 2.105条
+    }).then((response) => {
+      const { code, result, total } = response;
+      if (code > 0) {
+        this.setState({
+          mutilLoading: false,
+          mutilDataSource: result,
+          pagination: {
+            ...pagination,
+            total,
+          },
+        });
+      }
+    }).catch((error) => {
+      message.error(error);
+      this.setState({ mutilLoading: false });
     });
   }
 
@@ -79,12 +118,85 @@ class BasicTable extends Component {
     return columns;
   }
 
+  // 表格翻页
+  onPageChange = (current) => {
+    const { pagination } = this.state;
+    this.setState({
+      pagination: {
+        ...pagination,
+        current,
+      },
+    });
+  }
+
+  // (单)多选框勾选框回调
+  handleSelectChange = (selectedRowKeys, selectedRows, selectedAll) => {
+    this.setState({
+      selectedDatas: {
+        selectedRowKeys,
+        selectedRows,
+        selectedAll,
+      },
+    });
+  }
+
+  // 点击单选表格每一行触发
+  onRowClick = (record) => {
+    message.info(`点击的用户名是${record.username}`);
+  }
+
   render() {
-    const { dataSource, loading } = this.state;
+    const { basicLoading, mutilLoading } = this.state;
+    const { basicDataSource, mutilDataSource } = this.state;
+    const { selectedDatas: { selectAll, selectedRowKeys }, pagination: { total, current, pageSize } } = this.state;
+
+    const tableProps = {
+      rowKey: 'id', // 列表数据的唯一标识
+      loading: mutilLoading,
+      columns: this.getColumns(),
+      dataSource: mutilDataSource,
+      rowSelection: {
+        type: 'checkbox', // checkbox: 多选 | radio 单选
+        crossPageSelect: true, // (checkbox)跨页全选
+        selectAll, // 全选
+        selectedRowKeys, // 选中(未全选时) || (全选后)取消选中的rowkey值
+        onChange: this.handleSelectChange,
+      },
+      pagination: {
+        showTotal: () => `共${total}条`,
+        showLessItems: true, // (具体效果好像忘记了... 好像是不够一页就不展示分页选项)
+        showSizeChanger: true, // 是否可以改变 pageSize
+        showQuickJumper: true, // 是否展示快速翻页
+        total,
+        current,
+        pageSize,
+        onChange: this.onPageChange,
+      },
+
+    };
+
     return (
-      <Card title="基础表格" className={styles.myCard}>
-        <Table columns={this.getColumns()} dataSource={dataSource} loading={loading} />
-      </Card>
+      <React.Fragment>
+        <Card title="基础表格" className={styles.myCard}>
+          <Table
+            loading={basicLoading}
+            columns={this.getColumns()}
+            dataSource={basicDataSource}
+            pagination={false}
+            onRow={(record) => {
+              return {
+                onClick: () => {
+                  this.onRowClick(record);
+                },
+              };
+            }}
+          />
+        </Card>
+
+        <Card title="多选表格" className={styles.myCard}>
+          <Table {...tableProps} />
+        </Card>
+      </React.Fragment>
     );
   }
 }

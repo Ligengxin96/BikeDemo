@@ -13,7 +13,7 @@ class Admin extends Component {
       <Row className={styles.container}>
         <Col span={4} className={styles.leftNva} style={{ backgroundColor: menuTheme === 'dark' ? '#001529' : '#FFFFFF' }} >
           {/* 左侧菜单栏部分 */}
-          <LeftNav dispatch={dispatch} />
+          <LeftNav menuTitle={menuTitle} menuTheme={menuTheme} dispatch={dispatch} />
         </Col>
         <Col span={20} className={styles.main}>
           {/* 头部组件部分 */}
