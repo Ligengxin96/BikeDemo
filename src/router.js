@@ -2,21 +2,13 @@ import React from 'react';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import { Router, Route, Switch, Redirect } from 'dva/router';
+import uiRoutes from './routesConfig/Admin/UI';
+import formRoutes from './routesConfig/Admin/Form';
+import tableRoutes from './routesConfig/Admin/Table';
 import App from './App';
 import Admin from './admin';
 import Login from './routes/Login';
 import Home from './routes/Content';
-import Buttons from './routes/Admin/UI/Buttons';
-import Modals from './routes/Admin/UI/Modals';
-import Spins from './routes/Admin/UI/Spins';
-import GlobalMessage from './routes/Admin/UI/GlobalMessage';
-import Tab from './routes/Admin/UI/Tab';
-import Gallery from './routes/Admin/UI/Gallery';
-import Carousels from './routes/Admin/UI/Carousels';
-import LoginForm from './routes/Admin/Forms/Login';
-import RegisterForm from './routes/Admin/Forms/Register';
-import BasicTable from './routes/Admin/Tables/BasicTable';
-import AdvancedTable from './routes/Admin/Tables/AdvancedTable';
 import NoFound from './components/ErrorPages/404';
 
 
@@ -34,19 +26,24 @@ function RouterConfig({ history }) {
                   <Admin>
                     <Switch>
                       <Route path="/home" component={Home} />
-                      <Route path="/admin/ui/buttons" component={Buttons} />
-                      <Route path="/admin/ui/modals" component={Modals} />
-                      <Route path="/admin/ui/loadings" component={Spins} />
-                      <Route path="/admin/ui/notification" component={GlobalMessage} />
-                      <Route path="/admin/ui/messages/:queryParams" component={GlobalMessage} />
-                      <Route path="/admin/ui/tabs/:queryParams" component={Tab} />
-                      <Route path="/admin/ui/gallery" component={Gallery} />
-                      <Route path="/admin/ui/carousel" component={Carousels} />
-                      <Route path="/admin/form/login" component={LoginForm} />
-                      <Route path="/admin/form/register" component={RegisterForm} />
-                      <Route path="/admin/table/basic" component={BasicTable} />
-                      <Route path="/admin/table/basic" component={BasicTable} />
-                      <Route path="/admin/table/advanced" component={AdvancedTable} />
+                      {/* UI部分路由 */}
+                      {
+                        uiRoutes.map((item) => {
+                          return <Route path={item.path} component={item.component} />;
+                        })
+                      }
+                      {/* Form部分路由 */}
+                      {
+                        formRoutes.map((item) => {
+                          return <Route path={item.path} component={item.component} />;
+                        })
+                      }
+                      {/* Table部分路由 */}
+                      {
+                        tableRoutes.map((item) => {
+                          return <Route path={item.path} component={item.component} />;
+                        })
+                      }
                       <Redirect to="/home" />
                     </Switch>
                   </Admin>
