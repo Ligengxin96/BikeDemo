@@ -3,6 +3,7 @@ import Moment from 'moment';
 import { Card, Table, message } from 'antd';
 import CrossPageSelectTable from '../../../myComponents/myTable/CrossPageSelectTable';
 import { fetchCustomer } from '../../../../services/customer';
+import { calcSelectCount } from '../../../../utils/common';
 import styles from '../../../../style/common.less';
 
 class BasicTable extends Component {
@@ -18,9 +19,10 @@ class BasicTable extends Component {
     },
     pagination: {
       current: 1,
-      pageSize: 5,
+      pageSize: 10,
       total: 0,
     },
+    sortedInfo: null, // 排序信息
   }
 
   componentDidMount() {
@@ -119,6 +121,65 @@ class BasicTable extends Component {
     return columns;
   }
 
+  getSortColumns = () => {
+    const { dictionary } = this.props;
+    const { status: statusAry } = dictionary;
+    let { sortedInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    const columns = [
+      {
+        fixed: 'left',
+        title: '姓名',
+        dataIndex: 'username',
+      },
+      {
+        fixed: 'left',
+        title: '年龄',
+        dataIndex: 'age',
+        sorter: (a, b) => a.age - b.age,
+        sortOrder: sortedInfo.columnKey === 'age' && sortedInfo.order,
+      },
+      {
+        title: '性别',
+        dataIndex: 'sex',
+        render: (text) => { return text === 1 ? '男' : '女'; },
+      },
+      {
+        title: '是否单身',
+        dataIndex: 'isSingle',
+        render: (text) => { return text === 1 ? '是' : '否'; },
+      },
+      {
+        title: '状态',
+        dataIndex: 'status',
+        render: (text) => {
+          let status = text;
+          statusAry.forEach((item) => {
+            if (item.ibm === text) {
+              status = item.note;
+            }
+          });
+          return status;
+        },
+      },
+      {
+        title: '生日',
+        dataIndex: 'birthday',
+        render: (text) => { return Moment(text).format('YYYY-MM-DD'); },
+      },
+      {
+        title: '联系地址',
+        dataIndex: 'address',
+      },
+      {
+        fixed: 'right',
+        title: '电子邮箱',
+        dataIndex: 'email',
+      },
+    ];
+    return columns;
+  }
+
   // 表格翻页
   onPageChange = (current) => {
     const { pagination } = this.state;
@@ -130,6 +191,21 @@ class BasicTable extends Component {
     });
   }
 
+  /**
+   * 表格的onchange回调
+   * @param pagination 表格的分页对象
+   * @param filter 表格的过滤对象
+   * @param sort 表格的排序对象
+   */
+  onTableChange = (pagination, filters, sorter) => {
+    console.info('pagination', pagination); // eslint-disable-line
+    console.info('filters', filters); // eslint-disable-line
+    console.info('sorter', sorter); // eslint-disable-line
+    this.setState({
+      sortedInfo: sorter,
+    });
+  }
+
   // (单)多选框勾选框回调
   handleSelectChange = (selectedRowKeys, selectedRows, selectedAll) => {
     this.setState({
@@ -138,7 +214,12 @@ class BasicTable extends Component {
         selectedRows,
         selectedAll,
       },
-    });
+    }, this.showSelectCount);
+  }
+
+  showSelectCount = () => {
+    const { selectedDatas, pagination } = this.state;
+    message.info(`选中了${calcSelectCount(selectedDatas, pagination)}个客户`);
   }
 
   // 点击单选表格每一行触发
@@ -168,14 +249,15 @@ class BasicTable extends Component {
       pagination: {
         showTotal: () => `共${total}条`,
         showLessItems: true, // (具体效果好像忘记了... 好像是不够一页就不展示分页选项)
-        showSizeChanger: true, // 是否可以改变 pageSize
+        // showSizeChanger: true, // 是否可以改变 pageSize 记得设置onChange函数
         showQuickJumper: true, // 是否展示快速翻页
         total,
         current,
         pageSize,
         onChange: this.onPageChange,
       },
-
+      scroll: { y: 240 }, // 固定头部, 表格内部滚动
+      // onChange: this.onPageSizeChange,  这里需要注意排序,筛选,分页表格的任务变化都会触发Table的onChange,所有排序和分页共存的时候需要注意下
     };
 
     return (
@@ -199,6 +281,19 @@ class BasicTable extends Component {
 
         <Card title="可跨页多选表格" className={styles.myCard}>
           <CrossPageSelectTable {...tableProps} />
+        </Card>
+
+        {/* 只需要给columns加个 fixed 属性(取值'left' || 'right') 就能固定列(在表格左边或者右边)了 */}
+        <Card title="固定列的可排序表格" className={styles.myCard}>
+          <Table
+            rowKey="id"
+            pagination={false}
+            scroll={{ x: 2400 }}
+            loading={basicLoading}
+            dataSource={basicDataSource}
+            onChange={this.onTableChange}
+            columns={this.getSortColumns()}
+          />
         </Card>
 
       </React.Fragment>

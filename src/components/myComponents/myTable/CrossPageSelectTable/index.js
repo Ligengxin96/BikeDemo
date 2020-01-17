@@ -26,22 +26,23 @@ class CrossPageSelectTable extends Component {
     const { dataSource = [], rowSelection: { selectedAll, selectedRowKeys = [] } } = this.props;
 
     const selectedRows = []; // 选中的每一行数据(obj)
+    let currentSelectedRowKeys = selectedRowKeys; // 当前选中的selectedRowKeys
 
     // (勾选了全选 && 选中该项 || 未勾选全选 && 取消勾选该项)
     if ((selectedAll && selected) || (!selectedAll && !selected)) {
       // 将selectedRowKeys(selectedRows)中的该项去掉
-      selectedRowKeys.filter(item => item !== value);
+      currentSelectedRowKeys = selectedRowKeys.filter(item => item !== value);
     }
 
     // (勾选了全选 && 选中该项 || 未勾选全选 && 勾选该项) 后需要在selectedRowKeys中加上该项
     if ((selectedAll && !selected) || (!selectedAll && selected)) {
-      selectedRowKeys.push(value);
+      currentSelectedRowKeys.push(value);
     }
 
     // 获取所有 选中或者取消选中 的一行记录
     dataSource.forEach((item) => {
       const key = this.rowKeyValue(item);
-      if (selectedRowKeys.includes(key)) {
+      if (currentSelectedRowKeys.includes(key)) {
         selectedRows.push(item);
       }
     });
@@ -50,7 +51,7 @@ class CrossPageSelectTable extends Component {
     if (JSON.stringify(selectedRows) === JSON.stringify(dataSource)) {
       this.handleSelectChange([], [], true);
     } else {
-      this.handleSelectChange(selectedRowKeys, selectedRows, selectedAll);
+      this.handleSelectChange(currentSelectedRowKeys, selectedRows, selectedAll);
     }
   }
 
@@ -70,7 +71,7 @@ class CrossPageSelectTable extends Component {
   }
 
   render() {
-    const { rowSelection, rowKey = 'id', columns, dataSource, ...otherProps } = this.props;
+    const { rowSelection = {}, rowKey = 'id', columns, dataSource, ...otherProps } = this.props;
     const { crossPageSelect = true, type = 'checkbox' } = rowSelection;
     const finalColumns = [];
     let needCrossPageSelectTable = true;
@@ -78,11 +79,12 @@ class CrossPageSelectTable extends Component {
     // 没有rowSelection && 不需要跨页全选 && 没数据 && type不是checkbox (那就不展示CheckBox)
     if (rowSelection && crossPageSelect && dataSource.length > 0 && type === 'checkbox') {
       needCrossPageSelectTable = false;
-      const { selectedAll, selectedRowKeys } = rowSelection;
+      const { selectedAll, selectedRowKeys = [] } = rowSelection;
 
       const _this = this;
       // 添加一列用于渲染checkbox选择框
       finalColumns[0] = {
+        width: '2rem', // 这个原本设置了1rem 会导致在设置了scroll属性后第一列数据被挡住
         fixed: true, // 把选择框列固定在左边
         title: <Checkbox
           indeterminate={selectedRowKeys.length > 0} // 全选或者非全选样式，全选的话是填满状态，为全选是半满状态
