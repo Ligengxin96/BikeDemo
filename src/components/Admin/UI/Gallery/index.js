@@ -36,13 +36,14 @@ class Gallery extends Component {
 
   render() {
     const { visible, currentImageSrc } = this.state;
-    const imageList = images.map(list => list.map(item => (
+    const imageList = images.map(list => list.map((item, index) => (
       <Card
         style={{ marginBottom: 10 }}
         // 图片需要放在public文件夹下的assets里面 才可以下面这样写路径
         cover={<img src={`/assets/gallery/${item}`} onClick={() => this.openGallery(item)} alt="" />}
       >
         <Card.Meta
+          key={index}
           title="Freedom"
           description="想要有一天能走遍千山万水"
         />

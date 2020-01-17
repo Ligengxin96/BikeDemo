@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'dva';
 import LeftNavComponent from '../../components/LeftNav';
 
 class LeftNav extends Component {
@@ -10,4 +11,7 @@ class LeftNav extends Component {
   }
 }
 
-export default LeftNav;
+export default connect(({ leftNavModel }) => ({
+  menuTitle: leftNavModel.menuTitle,
+  menuTheme: leftNavModel.menuTheme,
+}))(LeftNav);
