@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Table, InputNumber, Popconfirm, Form } from 'antd';
+import { Table, Input, Popconfirm, Form } from 'antd';
 
 // Cloumns 里面需要设置为编辑的列需要添加 editable = true 属性
 const EditableContext = React.createContext();
 
 class EditableCell extends Component {
   getInput = () => {
-    return <InputNumber />;
+    return <Input />;
   };
 
   renderCell = ({ getFieldDecorator }) => {
@@ -64,14 +64,14 @@ class EditableTable extends Component {
     this.setState({ deletingKey: '' });
   };
 
-  save(form, id) {
+  save(form, record) {
     form.validateFields((error, row) => {
       if (error) {
         return;
       }
       const { handleUpdate } = this.props;
       if (handleUpdate && typeof handleUpdate === 'function') {
-        handleUpdate(Object.assign({}, row, { id }), 2);
+        handleUpdate(Object.assign({}, record, row), 2);
       }
     });
     this.setState({ editingKey: '' });
@@ -80,6 +80,7 @@ class EditableTable extends Component {
   edit(key) {
     this.setState({ editingKey: key });
   }
+
   delete(id) {
     const { handleUpdate } = this.props;
     if (handleUpdate && typeof handleUpdate === 'function') {
@@ -104,7 +105,6 @@ class EditableTable extends Component {
           ...col,
           onCell: record => ({ // 往上面EditableCell组件传props应该是在这里(没试过 以为有这个需求,但是后来否定了)
             record,
-            inputType: 'number',
             dataIndex: col.dataIndex,
             title: col.title,
             editing: this.isEditing(record),
@@ -121,7 +121,7 @@ class EditableTable extends Component {
               <EditableContext.Consumer>
                 {form => (
                   <a
-                    onClick={() => this.save(form, record.id)}
+                    onClick={() => this.save(form, record)}
                     style={{ marginRight: 8, color: '#54a9df' }}
                   >
                       保存
@@ -138,19 +138,18 @@ class EditableTable extends Component {
             </span>
           ) : (
             <React.Fragment>
-              { record.ifupdate === 1 && (
-                <React.Fragment>
-                  <a style={{ color: '#54a9df', marginRight: 8 }} onClick={() => this.edit(record.id)}>
+              <React.Fragment>
+                <a style={{ color: '#54a9df', marginRight: 8 }} onClick={() => this.edit(record.id)}>
                     编辑
-                  </a>
-                  <Popconfirm title="确定删除这一行数据?" onConfirm={() => this.delete(record.id)}>
-                    <a
-                      style={{ marginRight: 8, color: '#54a9df' }}
-                    >
+                </a>
+                <Popconfirm title="确定删除这一行数据?" onConfirm={() => this.delete(record.id)}>
+                  <a
+                    style={{ marginRight: 8, color: '#54a9df' }}
+                  >
                       删除
-                    </a>
-                  </Popconfirm>
-                </React.Fragment>)}
+                  </a>
+                </Popconfirm>
+              </React.Fragment>
             </React.Fragment>
           );
         },

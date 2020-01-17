@@ -262,6 +262,7 @@ class BasicTable extends Component {
 
     return (
       <React.Fragment>
+
         <Card title="基础表格" className={styles.myCard}>
           <Table
             rowKey="id"

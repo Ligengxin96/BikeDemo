@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Table, InputNumber, Popconfirm, Form } from 'antd';
+import { Table, Input, Popconfirm, Form } from 'antd';
 import styles from './index.less';
-
 
 const EditableContext = React.createContext();
 
@@ -23,7 +22,7 @@ class EditableCell extends Component {
 
     this.setState({ editing }, () => {
       if (editing) {
-        this.InputNumber.focus();
+        this.Input.focus();
       }
     });
   };
@@ -55,9 +54,9 @@ class EditableCell extends Component {
             },
           ],
           initialValue: record[dataIndex],
-        })(<InputNumber
+        })(<Input
           // eslint-disable-next-line no-return-assign
-          ref={node => (this.InputNumber = node)}
+          ref={node => (this.Input = node)}
           min={0}
           onPressEnter={this.save}
           onBlur={this.save}
