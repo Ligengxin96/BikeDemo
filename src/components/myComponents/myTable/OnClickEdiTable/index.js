@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Table, InputNumber, Popconfirm, Form } from 'antd';
 import styles from './index.less';
 
@@ -13,7 +13,7 @@ const EditableRow = ({ form, index, ...props }) => (
 
 const EditableFormRow = Form.create()(EditableRow);
 
-class EditableCell extends React.Component {
+class EditableCell extends Component {
   state = {
     editing: false,
   };

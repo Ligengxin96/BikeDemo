@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
 import { Card, Table, message } from 'antd';
+import CrossPageSelectTable from '../../../myComponents/myTable/CrossPageSelectTable';
 import { fetchCustomer } from '../../../../services/customer';
 import styles from '../../../../style/common.less';
 
@@ -148,7 +149,7 @@ class BasicTable extends Component {
   render() {
     const { basicLoading, mutilLoading } = this.state;
     const { basicDataSource, mutilDataSource } = this.state;
-    const { selectedDatas: { selectAll, selectedRowKeys }, pagination: { total, current, pageSize } } = this.state;
+    const { selectedDatas: { selectedAll, selectedRowKeys }, pagination: { total, current, pageSize } } = this.state;
 
     const tableProps = {
       rowKey: 'id', // 列表数据的唯一标识
@@ -158,8 +159,10 @@ class BasicTable extends Component {
       rowSelection: {
         type: 'checkbox', // checkbox: 多选 | radio 单选
         crossPageSelect: true, // (checkbox)跨页全选
-        selectAll, // 全选
+        selectedAll, // 全选
         selectedRowKeys, // 选中(未全选时) || (全选后)取消选中的rowkey值
+        // 可跨页选择表格默认 type = 'checkbox' , crossPageSelect = true 所有rowSelection只需要 下面两行
+        // {...selectedDatas}
         onChange: this.handleSelectChange,
       },
       pagination: {
@@ -194,9 +197,10 @@ class BasicTable extends Component {
           />
         </Card>
 
-        <Card title="多选表格" className={styles.myCard}>
-          <Table {...tableProps} />
+        <Card title="可跨页多选表格" className={styles.myCard}>
+          <CrossPageSelectTable {...tableProps} />
         </Card>
+
       </React.Fragment>
     );
   }

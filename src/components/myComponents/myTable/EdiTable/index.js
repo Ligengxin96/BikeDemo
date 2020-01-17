@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Table, InputNumber, Popconfirm, Form } from 'antd';
 
 // Cloumns 里面需要设置为编辑的列需要添加 editable = true 属性
 const EditableContext = React.createContext();
 
-class EditableCell extends React.Component {
+class EditableCell extends Component {
   getInput = () => {
     return <InputNumber />;
   };
@@ -47,7 +47,7 @@ class EditableCell extends React.Component {
 }
 
 // eslint-disable-next-line react/no-multi-comp
-class EditableTable extends React.Component {
+class EditableTable extends Component {
   constructor(props) {
     super(props);
     this.state = { editingKey: '' };
