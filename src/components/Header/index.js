@@ -45,9 +45,9 @@ class Header extends Component {
   fetchWeather = (city) => {
     axios({
       method: 'GET',
-      url: `https://free-api.heweather.net/s6/weather/now?location=${city}&key=0aed2b33817345f6b949b560aa26b1f5`,
+      url: `https://restapi.amap.com/v3/weather/weatherInfo?city=${city}&key=6bfd6741f71e7f3d12bdbd56ca4019ed`,
     }).then((response) => {
-      const weather = lodash.get(response, 'data.HeWeather6[0].now.cond_txt', '--');
+      const weather = lodash.get(response, 'data.lives[0].weather', '--');
       this.setState({ weather });
     }).catch((error) => {
       message.error(error.message);
