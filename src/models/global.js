@@ -31,8 +31,7 @@ export default {
     setup({ dispatch, history }) {  // eslint-disable-line
       history.listen(({ pathname }) => {
         const ignorePath = ['/admin/form/register', '/admin/form/login'];
-        // 先屏蔽了不然开发起来烦人
-        if (false && !ignorePath.includes(pathname)) { // eslint-disable-line 
+        if (!ignorePath.includes(pathname)) {
           dispatch({ type: 'checkAuth' }); // 每次访问新路由的时候,检查用户信息是否过期
         }
       });
@@ -45,6 +44,14 @@ export default {
         type: 'save',
         payload: {
           hasAuth: payload,
+        },
+      });
+    },
+    *logout({ payload }, { call, put }) {  // eslint-disable-line
+      yield put({
+        type: 'save',
+        payload: {
+          hasAuth: 0,
         },
       });
     },

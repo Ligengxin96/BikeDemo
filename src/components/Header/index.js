@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'dva/router';
 import lodash from 'lodash';
 import Moment from 'moment';
+import { Link, routerRedux } from 'dva/router';
 import { Row, Col, Divider, message } from 'antd';
 
 const axios = require('axios');
@@ -54,6 +54,25 @@ class Header extends Component {
     });
   }
 
+  // 登录或者登出
+  loginOrLogOut = (name) => {
+    // 如果有姓名说明是登出 反之就是登录
+    const { dispatch } = this.props;
+    if (name) {
+      // 清楚权限
+      dispatch({
+        type: 'globalModel/logout',
+      });
+      // 清除用户信息
+      dispatch({
+        type: 'userModel/setUserInformation',
+        payload: {},
+      });
+    } else {
+      dispatch(routerRedux.push('/admin/form/register'));
+    }
+  }
+
   render() {
     const { time, weather } = this.state;
     const { url = '/home', title = '首页' } = lodash.get(this.props, 'menuTitle', {});
@@ -63,8 +82,8 @@ class Header extends Component {
         <Row>
           <Col>
             <div style={{ display: 'flex', fontSize: '1.2rem', float: 'right' }}>
-              <p>欢迎你,{name}</p>
-              <a style={{ padding: '0 1rem' }}>退出</a>
+              { name && <p>欢迎你,{name}</p>}
+              <p><a onClick={() => this.loginOrLogOut(name)} style={{ padding: '0 1rem' }}>{ name ? '退出' : '登录' }</a></p>
             </div>
           </Col>
         </Row>

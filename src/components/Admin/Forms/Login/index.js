@@ -9,7 +9,7 @@ const FormItem = Form.Item;
 class LoginForm extends React.Component {
   // 登录按钮点击回调
   loginSubmit = () => {
-    const { form: { getFieldValue, validateFields }, dispatch, user } = this.props;
+    const { form: { getFieldValue, validateFields }, dispatch, registerInfo } = this.props;
     validateFields((error, values) => {
       if (error) {
         const key = Object.keys(error);
@@ -22,8 +22,14 @@ class LoginForm extends React.Component {
         });
       } else {
         // eslint-disable-next-line no-lonely-if
-        if (user.name === values.userName && user.password === values.password) {
-          message.success(`欢迎你${user.name}`);
+        if (registerInfo.name === values.userName && registerInfo.password === values.password) {
+          message.success(`欢迎你${registerInfo.name}`);
+          // 设置用户信息
+          dispatch({
+            type: 'userModel/setUserInformation',
+            payload: registerInfo,
+          });
+          // 设置权限
           dispatch({
             type: 'globalModel/login',
             payload: 1,

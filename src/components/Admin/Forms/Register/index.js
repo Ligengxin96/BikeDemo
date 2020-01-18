@@ -47,7 +47,7 @@ class FormRegister extends React.Component {
       } else {
         const city = lodash.get(values, `hometown[${values.hometown.length - 2}]`, '北京');
         dispatch({
-          type: 'userModel/setUserInformation',
+          type: 'userModel/setRegisterInfo',
           payload: {
             city,
             name: values.userName,
