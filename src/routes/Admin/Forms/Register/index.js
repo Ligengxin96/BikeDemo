@@ -4,14 +4,13 @@ import RegisterFormComponent from '../../../../components/Admin/Forms/Register';
 
 class RegisterForm extends Component {
   render() {
-    const { user, dispatch, dictionary } = this.props;
+    const { user, dispatch } = this.props;
     return (
-      <RegisterFormComponent user={user} dispatch={dispatch} dictionary={dictionary} />
+      <RegisterFormComponent user={user} dispatch={dispatch} />
     );
   }
 }
 
-export default connect(({ userModel, globalModel }) => ({
+export default connect(({ userModel }) => ({
   user: userModel.user,
-  dictionary: globalModel.dictionary,
 }))(RegisterForm);

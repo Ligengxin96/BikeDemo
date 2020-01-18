@@ -100,7 +100,7 @@ class LoginForm extends React.Component {
                     initialValue: true,
                 })(<Checkbox>记住密码</Checkbox>)
               }
-              <a href="#" style={{ float: 'right' }}>忘记密码</a>
+              <a onClick={() => { message.info('还没数据库噢'); }} style={{ float: 'right' }}>忘记密码</a>
             </FormItem>
 
             <FormItem>

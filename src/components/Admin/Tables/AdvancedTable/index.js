@@ -3,6 +3,7 @@ import Moment from 'moment';
 import { Card, message } from 'antd';
 import { fetchCustomer } from '../../../../services/customer';
 import EdiTable from '../../../myComponents/myTable/EdiTable';
+import { getDictionary } from '../../../../utils/common';
 import OnClickEdiTable from '../../../myComponents/myTable/OnClickEdiTable';
 import styles from '../../../../style/common.less';
 
@@ -98,8 +99,7 @@ class AdvancedTable extends Component {
   }
 
   getColumns = () => {
-    const { dictionary } = this.props;
-    const { status: statusAry } = dictionary;
+    const statusAry = getDictionary('status');
     const columns = [
       {
         title: '姓名',

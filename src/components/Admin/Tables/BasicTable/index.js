@@ -3,7 +3,7 @@ import Moment from 'moment';
 import { Card, Table, message } from 'antd';
 import CrossPageSelectTable from '../../../myComponents/myTable/CrossPageSelectTable';
 import { fetchCustomer } from '../../../../services/customer';
-import { calcSelectCount } from '../../../../utils/common';
+import { calcSelectCount, getDictionary } from '../../../../utils/common';
 import styles from '../../../../style/common.less';
 
 class BasicTable extends Component {
@@ -52,7 +52,7 @@ class BasicTable extends Component {
   // 获取表格数据
   fetchSingleTableData = () => {
     this.setState({ mutilLoading: true });
-    const { pagination } = this.props;
+    const { pagination } = this.state;
     fetchCustomer({
       limit: 2, // limit: 返回数量限制, 1.5条 | 2.105条
     }).then((response) => {
@@ -74,8 +74,7 @@ class BasicTable extends Component {
   }
 
   getColumns = () => {
-    const { dictionary } = this.props;
-    const { status: statusAry } = dictionary;
+    const statusAry = getDictionary('status');
     const columns = [
       {
         title: '姓名',
@@ -122,8 +121,7 @@ class BasicTable extends Component {
   }
 
   getSortColumns = () => {
-    const { dictionary } = this.props;
-    const { status: statusAry } = dictionary;
+    const statusAry = getDictionary('status');
     let { sortedInfo } = this.state;
     sortedInfo = sortedInfo || {};
     const columns = [

@@ -13,7 +13,7 @@
     }), null, null, { withRef: true })(Form));  // Form是类名
 
 ## Form:  
-    <EnhancedForm wrappedComponentRef={(form) => this.form = form} />
+    <EnhancedForm wrappedComponentRef={(from) => { this.from = from; }} />
 
 ## 同时被Form,connect两者包裹着的组件:  
     待续(目前没遇到过, 感觉可以用上面的withRef方法)

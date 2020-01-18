@@ -1,8 +1,10 @@
 import customer from './customer';
+import cityManage from './cityManage';
 
 const getApis = () => {
   const apis = { // apis: 数据类型对象数组 { [], ... }
-    customer,
+    customer, // 客户模块接口
+    cityManage, // 城市管理模块接口
   };
   const api = {};
   const apisKey = Object.keys(apis) || [];

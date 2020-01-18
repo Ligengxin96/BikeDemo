@@ -2,7 +2,7 @@ import React from 'react';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import { Router, Route, Switch, Redirect } from 'dva/router';
-import adminRoutes from './routesConfig/Admin';
+import routes from './routesConfig';
 import App from './App';
 import Admin from './admin';
 import Login from './routes/Login';
@@ -25,8 +25,8 @@ function RouterConfig({ history }) {
                     <Switch>
                       <Route path="/home" component={Home} />
                       {
-                        adminRoutes.map((item) => {
-                          return <Route path={item.path} component={item.component} />; // Admin部分路由
+                        routes.map((item) => {
+                          return <Route path={item.path} component={item.component} />;
                         })
                       }
                       <Redirect to="/home" />

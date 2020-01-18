@@ -4,6 +4,7 @@ import lodash from 'lodash';
 import { routerRedux } from 'dva/router';
 import { Card, Col, Form, Button, Input, Checkbox, Radio, Select, Switch, DatePicker, TimePicker, Upload, Icon, message, InputNumber, Cascader } from 'antd';
 import cascaderDatas from '../../../../assets/config/cascaderDatas';
+import { getDictionary } from '../../../../utils/common';
 import MyModal from '../../../myComponents/myModal';
 import styles from '../../../../style/common.less';
 
@@ -94,8 +95,8 @@ class FormRegister extends React.Component {
 
   render() {
     const { loading, userImage, visible } = this.state;
-    const { form: { getFieldDecorator }, dictionary } = this.props;
-    const { status: statusAry } = dictionary;
+    const { form: { getFieldDecorator } } = this.props;
+    const statusAry = getDictionary('status');
 
     // 表单内(一个FormItem)也具有栅格系统
     const formItemLayout = {
