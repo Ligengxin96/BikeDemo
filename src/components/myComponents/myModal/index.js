@@ -53,7 +53,7 @@ class MyModal extends Component {
     const { width, height, top } = this.state;
     const { className, style = {}, maskClosable = false, destroyOnClose = true, title, ...otherProps } = this.props;
     const modalProps = {
-      ref: (c) => { this.modal = c; },
+      // ref: (c) => { this.modal = c; },
       className,
       style: Object.assign(style, { height, top }),
       getContainer: this.getContainer,

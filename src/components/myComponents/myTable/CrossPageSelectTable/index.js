@@ -74,7 +74,7 @@ class CrossPageSelectTable extends Component {
     const { rowSelection = {}, rowKey = 'id', columns, dataSource, ...otherProps } = this.props;
     const { crossPageSelect = true, type = 'checkbox' } = rowSelection;
     const finalColumns = [];
-    let needCrossPageSelectTable = true;
+    let needCrossPageSelectTable = crossPageSelect;
 
     // 没有rowSelection && 不需要跨页全选 && 没数据 && type不是checkbox (那就不展示CheckBox)
     if (rowSelection && crossPageSelect && dataSource.length > 0 && type === 'checkbox') {
