@@ -13,6 +13,10 @@ class RichText extends Component {
     editorState: '', // 编辑操作内容
   };
 
+  componentDidMount() {
+    this.editor.focusEditor(); // 自动聚焦到编辑框
+  }
+
   // 清空内容按钮点击事件
   handleClearContent = () => {
     this.setState({ editorState: '' });
@@ -52,6 +56,7 @@ class RichText extends Component {
 
         <Card title="富文本编辑器" className={styles.myCard} style={{ height: 'calc(65vh)' }}>
           <Editor
+            ref={(editor) => { this.editor = editor; }}
             editorState={editorState}
             onEditorStateChange={this.onEditorStateChange}
             onContentStateChange={this.onContentStateChange}

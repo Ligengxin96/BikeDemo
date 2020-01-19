@@ -77,11 +77,11 @@ const menuList = [
   },
   {
     title: '城市管理',
-    key: '/city',
+    key: '/cityManage',
   },
   {
     title: '订单管理',
-    key: '/order',
+    key: '/orderManage',
     btnList: [
       {
         title: '订单详情',

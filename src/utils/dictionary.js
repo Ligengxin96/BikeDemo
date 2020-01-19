@@ -48,4 +48,29 @@ export default[
       note: '未授权',
     }],
   },
+  // 星期
+  {
+    weekData: [{
+      ibm: 1,
+      note: '周一',
+    }, {
+      ibm: 2,
+      note: '周二',
+    }, {
+      ibm: 3,
+      note: '周三',
+    }, {
+      ibm: 4,
+      note: '周四',
+    }, {
+      ibm: 5,
+      note: '周五',
+    }, {
+      ibm: 6,
+      note: '周六',
+    }, {
+      ibm: 7,
+      note: '周日',
+    }],
+  },
 ];
