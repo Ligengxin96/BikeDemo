@@ -11,7 +11,7 @@ import 'echarts/lib/component/tooltip';
 import { getDictionary } from '../../../../utils/common';
 
 class Pie extends Component {
-  getOption = () => {
+  getFirstOption = () => {
     const option = {
       title: {
         text: '用户骑行订单',
@@ -70,7 +70,7 @@ class Pie extends Component {
     return option;
   }
 
-  getOption2 = () => {
+  getSecondOption = () => {
     const option = {
       title: {
         text: '用户骑行订单',
@@ -128,7 +128,7 @@ class Pie extends Component {
     return option;
   }
 
-  getOption3 = () => {
+  getThirdOption = () => {
     const option = {
       title: {
         text: '用户骑行订单',
@@ -191,7 +191,7 @@ class Pie extends Component {
         <Card>
           <ReactEcharts
             echarts={echarts}
-            option={this.getOption()}
+            option={this.getFirstOption()}
             notMerge
             lazyUpdate
             style={{ height: 500 }}
@@ -200,7 +200,7 @@ class Pie extends Component {
         <Card style={{ marginTop: 10 }}>
           <ReactEcharts
             echarts={echarts}
-            option={this.getOption2()}
+            option={this.getSecondOption()}
             notMerge
             lazyUpdate
             style={{ height: 500 }}
@@ -209,7 +209,7 @@ class Pie extends Component {
         <Card style={{ marginTop: 10 }}>
           <ReactEcharts
             echarts={echarts}
-            option={this.getOption3()}
+            option={this.getThirdOption()}
             notMerge
             lazyUpdate
             style={{ height: 500 }}
