@@ -4,7 +4,7 @@ const prefix = '';
 
 export default [
   {
-    path: `${prefix}/city`,
+    path: `${prefix}/cityManage`,
     component: CityManage,
   },
 ];
