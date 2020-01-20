@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import styles from './index.less';
+import '../../style/common.less';
 
 class Content extends Component {
   render() {
     return (
-      <div className={styles.home}>
+      <div className="context">
         <p style={{ fontSize: '1.333rem' }}>欢迎使用MyBike后台管理系统</p>
       </div>
     );

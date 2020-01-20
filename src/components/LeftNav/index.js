@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
-import lodash from 'lodash';
 import { NavLink } from 'react-router-dom';
-import { Menu, Row, Col, message } from 'antd';
-import menuListDatas from '../../assets/config/menuConfig';
+import { Menu, Row, Col } from 'antd';
+import menuListDatas from '../config/menuConfig';
 import './index.less';
 
 const { SubMenu } = Menu;
 
 class LeftNav extends Component {
-  constructor(props) {
-    super(props);
-    const { menuTitle: { url }, menuTheme } = props;
-    this.state = {
-      theme: menuTheme, // 菜单主题颜色 'light' 或者 'dark'
-      mode: 'inline', // 菜单类型 antd支持三种类型: 垂直: vertical | 水平: horizontal | 内嵌: inline
-      rootSubmenuKeys: [], // 菜单数据
-      openKeys: [], // 当前展开的菜单
-      current: [url], // 当前选中的菜单
-    };
+  state={
+    rootSubmenuKeys: [], // 菜单数据
+    openKeys: [], // 当前展开的菜单
+    current: ['/home'], // 当前选中的菜单
   }
 
   UNSAFE_componentWillMount() {
@@ -32,28 +25,10 @@ class LeftNav extends Component {
     this.setState({ menuNode, rootSubmenuKeys });
   }
 
-  // 点击图标文字改变菜单类型
-  changeMenuMode = (oldMode) => {
-    const mode = oldMode === 'inline' ? 'vertical' : 'inline';
-    message.info(`已切换菜单模式为${mode === 'inline' ? '内嵌' : '垂直'}`);
-    this.setState({ mode });
-  }
-
-  // 点击MyBike文字改变主题
-  changeMenuTheme = (oldTheme) => {
-    const { dispatch } = this.props;
-    const theme = oldTheme === 'light' ? 'dark' : 'light';
-    this.setState({ theme });
-    dispatch({
-      type: 'leftNavModel/getMenuTheme',
-      payload: theme,
-    });
-  }
-
   // 菜单展开回调
   onOpenChange = (openKey) => {
     const { openKeys, rootSubmenuKeys } = this.state;
-    const latestOpenKey = openKey.find(key => openKeys.indexOf(key) === -1);
+    const latestOpenKey = openKey.find((key) => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       this.setState({ openKeys: openKey });
     } else {
@@ -65,28 +40,15 @@ class LeftNav extends Component {
 
   // 菜单点击回调
   handleClick = (e) => {
-    const { dispatch } = this.props;
-    const url = lodash.get(e, 'key', '/home');
-    const title = lodash.get(e, 'item.props.title', '首页');
-    const menuTitle = {
-      url,
-      title,
-    };
-    // 如果点击了首页 收起别的展开菜单 不然样式有点难看
-    if (e.key === '/home') {
-      this.setState({
-        openKeys: [],
-      });
-    }
+    const { getMenuTitle } = this.props;
+    const { item: { props: { children = '' } } } = e;
     this.setState({
       current: e.key,
     });
-    dispatch({
-      type: 'leftNavModel/getMenuTitle',
-      payload: menuTitle,
-    });
+    if (getMenuTitle && typeof getMenuTitle === 'function') {
+      getMenuTitle(children);
+    }
   }
-
   // // 动态渲染菜单数据 感觉可行 但是点击菜单报错  Menu.item => 纠正 Menu.Item 就应该不会报错了
   // renderMenu = () => {
   //   const subMenuAry = [];
@@ -141,28 +103,25 @@ class LeftNav extends Component {
   }
 
   render() {
-    const { menuNode, openKeys, theme, mode, current } = this.state;
+    const { menuNode, openKeys, current } = this.state;
     return (
       <Row>
-        <Col span={6} onClick={() => this.changeMenuMode(mode)}>
+        <Col span={6}>
           <img src="assets/logo-ant.svg" style={{ width: '4rem', padding: '1rem 0 0 1rem' }} alt="" />
         </Col>
-        <Col span={12} onClick={() => this.changeMenuTheme(theme)}>
-          <h1 style={{ color: '#25c1ff', padding: '1rem', cursor: 'pointer' }}>MyBike</h1>
+        <Col span={12}>
+          <h1 style={{ color: '#25c1ff', padding: '1rem' }}>MyBike</h1>
         </Col>
-        <Col span={24}>
-          <Menu
-            className="my-menu"
-            mode={mode}
-            theme={theme}
-            openKeys={openKeys}
-            selectedKeys={current}
-            onClick={this.handleClick}
-            onOpenChange={this.onOpenChange}
-          >
-            {menuNode}
-          </Menu>
-        </Col>
+        <Menu
+          className="my-menu"
+          mode="inline"
+          openKeys={openKeys}
+          selectedKeys={current}
+          onClick={this.handleClick}
+          onOpenChange={this.onOpenChange}
+        >
+          {menuNode}
+        </Menu>
       </Row>
     );
   }
