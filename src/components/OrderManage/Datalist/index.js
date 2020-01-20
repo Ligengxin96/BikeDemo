@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import Moment from 'moment';
 import { Card, message } from 'antd';
 import CrossPageSelectTable from '../../myComponents/myTable/CrossPageSelectTable';
 import OpenCityBtn from './OpenCityBtn';
 import { fetchOrderList } from '../../../services/example'; // mock.yonyoucloud.com这个网站同样的返回值写法,不支持正则(加了转义字符直接报错)
-// import { getDictionary } from '../../../utils/common';
+import { getDictionary } from '../../../utils/common';
 import styles from '../../../style/common.less';
 
 class Datalist extends Component {
@@ -46,6 +47,7 @@ class Datalist extends Component {
   }
 
   getColumns = () => {
+    const orderStatusAry = getDictionary('orderStatus');
     const columns = [{
       title: '订单编号',
       dataIndex: 'orderId',
@@ -59,17 +61,28 @@ class Datalist extends Component {
       title: '手机号',
       dataIndex: 'phone',
     }, {
-      title: '里程',
+      title: '里程(km)',
       dataIndex: 'distance',
-      render(distance) {
-        return `${distance / 1000}Km`;
-      },
     }, {
       title: '行驶时长',
       dataIndex: 'totalTime',
+      render: (text) => {
+        const hour = parseInt(text / 60, 10);
+        const min = text % 60;
+        return hour ? `${hour}小时${min}分钟` : `${min}分钟`;
+      },
     }, {
       title: '状态',
-      dataIndex: 'status',
+      dataIndex: 'orderStatus',
+      render: (text) => {
+        let orderStatus = text;
+        orderStatusAry.forEach((item) => {
+          if (item.ibm === text) {
+            orderStatus = item.note;
+          }
+        });
+        return orderStatus;
+      },
     }, {
       title: '开始时间',
       dataIndex: 'startTime',
@@ -77,10 +90,10 @@ class Datalist extends Component {
       title: '结束时间',
       dataIndex: 'endTime',
     }, {
-      title: '订单金额',
+      title: '订单金额(元)',
       dataIndex: 'shouldPay',
     }, {
-      title: '实付金额',
+      title: '实付金额(元)',
       dataIndex: 'userPay',
     }];
     return columns;
@@ -109,9 +122,21 @@ class Datalist extends Component {
     let tempAry = dataSource;
     filterKeys.forEach((item) => {
       if (searchFormValue[item]) {
-        tempAry = tempAry.filter((inner) => {
-          return inner[item] === searchFormValue[item];
-        });
+        if (item === 'startTime') {
+          tempAry = tempAry.filter((inner) => {
+            return Moment(inner[item]).valueOf() > searchFormValue[item].valueOf();
+          });
+        }
+        if (item === 'endTime') {
+          tempAry = tempAry.filter((inner) => {
+            return Moment(inner[item]).valueOf() < searchFormValue[item].valueOf();
+          });
+        }
+        if (item !== 'startTime' && item !== 'endTime') {
+          tempAry = tempAry.filter((inner) => {
+            return inner[item] === searchFormValue[item];
+          });
+        }
       }
     });
     const tableProps = {
@@ -138,4 +163,5 @@ class Datalist extends Component {
     );
   }
 }
+
 export default Datalist;

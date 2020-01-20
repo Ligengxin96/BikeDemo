@@ -11,6 +11,6 @@ class OrderManage extends Component {
   }
 }
 
-export default connect(({ cityManageModel }) => ({
-  searchFormValue: cityManageModel.searchFormValue,
+export default connect(({ orderManageModel }) => ({
+  searchFormValue: orderManageModel.searchFormValue,
 }))(OrderManage);

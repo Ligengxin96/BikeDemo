@@ -73,4 +73,14 @@ export default[
       note: '周日',
     }],
   },
+  // 订单状态
+  {
+    orderStatus: [{
+      ibm: 1,
+      note: '进行中',
+    }, {
+      ibm: 2,
+      note: '已结束',
+    }],
+  },
 ];
