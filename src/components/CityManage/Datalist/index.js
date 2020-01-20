@@ -12,7 +12,7 @@ class Datalist extends Component {
     dataSource: [], // 表格数据源
     pagination: {
       current: 1,
-      pageSize: 5,
+      pageSize: 7,
       total: 0,
     },
   }

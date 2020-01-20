@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
-import { Card, message } from 'antd';
-import CrossPageSelectTable from '../../myComponents/myTable/CrossPageSelectTable';
-import OpenCityBtn from './OpenCityBtn';
+import { Card, Table, message } from 'antd';
+import DetailAndFinishBtn from './DetailAndFinishBtn';
 import { fetchOrderList } from '../../../services/example'; // mock.yonyoucloud.com这个网站同样的返回值写法,不支持正则(加了转义字符直接报错)
 import { getDictionary } from '../../../utils/common';
 import styles from '../../../style/common.less';
@@ -13,9 +12,10 @@ class Datalist extends Component {
     dataSource: [], // 表格数据源
     pagination: {
       current: 1,
-      pageSize: 5,
+      pageSize: 7,
       total: 0,
     },
+    selectedRowKeys: [],
   }
 
   componentDidMount() {
@@ -115,8 +115,13 @@ class Datalist extends Component {
     this.fetchTableData(type);
   }
 
+  // (单)多选框勾选框回调
+  handleSelectChange = (selectedRowKeys) => {
+    this.setState({ selectedRowKeys });
+  }
+
   render() {
-    const { loading, dataSource, pagination } = this.state;
+    const { loading, dataSource, pagination, selectedRowKeys } = this.state;
     const { searchFormValue } = this.props;
     const filterKeys = Object.keys(searchFormValue);
     let tempAry = dataSource;
@@ -142,11 +147,14 @@ class Datalist extends Component {
       }
     });
     const tableProps = {
+      rowKey: 'id',
       loading,
       dataSource: tempAry,
       columns: this.getColumns(),
       rowSelection: {
-        crossPageSelect: false,
+        type: 'radio',
+        selectedRowKeys,
+        onChange: this.handleSelectChange,
       },
       pagination: {
         ...pagination,
@@ -157,10 +165,10 @@ class Datalist extends Component {
     };
     return (
       <Card className={styles.myCard}>
-        {/* 开通城市按钮 */}
-        <OpenCityBtn reloadTable={this.reloadTable} />
+        {/* 订单详情和结束订单按钮 */}
+        <DetailAndFinishBtn selectedRowKeys={selectedRowKeys} reloadTable={this.reloadTable} />
         {/* 表格部分 */}
-        <CrossPageSelectTable {...tableProps} />
+        <Table {...tableProps} />
       </Card>
     );
   }
