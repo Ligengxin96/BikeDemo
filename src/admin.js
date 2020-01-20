@@ -1,44 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'dva';
 import { Row, Col } from 'antd';
-import LeftNav from './components/LeftNav';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import './style/common.less';
+import LeftNav from './routes/LeftNav';
+import Header from './routes/Header';
+import Footer from './routes/Footer';
+import styles from './style/common.less';
 
 class Admin extends Component {
-  state={
-    menuTitle: '首页', // 菜单标题
-  }
-
-  // 获取当前菜单标题
-  getMenuTitle = (menuTitle) => {
-    this.setState({ menuTitle });
-  }
-
   render() {
-    const { children } = this.props;
-    const { menuTitle } = this.state;
+    const { children, dispatch, menuTitle, menuTheme } = this.props;
     return (
-      <Row className="container">
-        <Col span={3} className="leftNva">
-          <LeftNav getMenuTitle={this.getMenuTitle} />
+      <Row className={styles.container}>
+        <Col span={4} className={styles.leftNva} style={{ backgroundColor: menuTheme === 'dark' ? '#001529' : '#FFFFFF' }} >
+          {/* 左侧菜单栏部分 */}
+          <LeftNav menuTitle={menuTitle} menuTheme={menuTheme} dispatch={dispatch} />
         </Col>
-        <Col span={21} className="main">
-          <Row>
-            <Col className="header">
-              <Header menuTitle={menuTitle} />
-            </Col>
-            <Col className="border">
-              { children }
-            </Col>
-            <Col className="footer">
-              <Footer />
-            </Col>
+        <Col span={20} className={styles.main}>
+          {/* 头部组件部分 */}
+          <Header menuTitle={menuTitle} />
+          <Row className={styles.content}>
+            {/* 中间内容部分 */}
+            {children}
           </Row>
+          {/* 页脚组件部分 */}
+          <Footer />
         </Col>
       </Row>
     );
   }
 }
 
-export default Admin;
+export default connect(({ leftNavModel }) => ({
+  menuTitle: leftNavModel.menuTitle,
+  menuTheme: leftNavModel.menuTheme,
+}))(Admin);

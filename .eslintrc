@@ -1,16 +1,12 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "plugins": ["react"],
   "env": {
     "node": true,
     "browser": true,
     "es6": true
   },
   "rules": {
-    "spread": 0,
-    "restParams": 0,
-    "react/state-in-constructor": [0],
     "camelcase": 0,
     "react/sort-comp": 0,
     "max-len": 0,
@@ -33,6 +29,9 @@
       "logical": "parens-new-line",
       "prop": "ignore"
     }],
+    "no-debugger":"warn", // 使用debugger 提示警告
+    "no-unused-vars": "warn", // 声明未使用 提交警告
+    "prefer-destructuring":"off", // 关闭强制使用解构
     "no-plusplus": 0,
     "no-await-in-loop": 0,
     "no-restricted-syntax": [0],
@@ -49,7 +48,6 @@
     "no-nested-ternary": [0],
     "no-loop-func": [0],
     "no-unused-expressions": "off",
-    "react/no-danger": 0,
     "no-mixed-operators": [
       "error",
       {
@@ -61,11 +59,13 @@
         ],
         "allowSamePrecedence": true
       }
-    ]
+    ],
+    "react/no-danger": 0
   },
   "parserOptions": {
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
+      "experimentalObjectRestSpread": true,
+      "legacyDecorators": true
     }
   },
   "settings": {
