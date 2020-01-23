@@ -17,3 +17,6 @@
 
 ## 同时被Form,connect两者包裹着的组件:  
     待续(目前没遇到过, 感觉可以用上面的withRef方法)
+
+## 是否应该使用ref
+  [传送门](https://github.com/Ligengxin96/BikeDemo/issues/6)

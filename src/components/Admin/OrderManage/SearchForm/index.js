@@ -90,6 +90,7 @@ class SearchForm extends Component {
                   />
                 ) // eslint-disable-line
               }
+              <span style={{ marginLeft: '0.8rem' }}> ~ </span>
               {
                 getFieldDecorator('endTime', {
                 })( // eslint-disable-line
