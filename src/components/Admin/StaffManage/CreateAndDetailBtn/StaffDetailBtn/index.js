@@ -36,7 +36,7 @@ class StaffDetailBtn extends Component {
       <React.Fragment>
         <Button onClick={() => this.handleOpenModal(selectedRows)}>员工详情</Button>
         <MyModal {...modalProps}>
-          {/* 结束订单弹框内容 */}
+          {/* 员工详情弹框内容 */}
           <StaffDetailForm selectedRows={selectedRows} />
         </MyModal>
       </React.Fragment>

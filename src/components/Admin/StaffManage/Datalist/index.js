@@ -26,11 +26,11 @@ class Datalist extends Component {
   }
 
   // 获取表格数据
-  fetchTableData = () => {
+  fetchTableData = (num) => {
     const { pagination } = this.state;
     this.setState({ loading: true });
     fetchStaff({
-      type: 1,
+      type: num + 1,
     }).then((response) => {
       const { code = 0, result = [], total = 0 } = response;
       if (code > 0) {
@@ -66,12 +66,12 @@ class Datalist extends Component {
       title: '性别',
       dataIndex: 'sex',
       editable: true,
-      render: (text) => { return text === 1 ? '男' : '女'; },
+      render: (text) => { return text.toString() === 1 ? '男' : '女'; },
     }, {
       title: '是否单身',
       dataIndex: 'isSingle',
       editable: true,
-      render: (text) => { return text === 1 ? '是' : '否'; },
+      render: (text) => { return text.toString() === '1' ? '是' : '否'; },
     }, {
       title: '状态',
       dataIndex: 'status',
@@ -79,7 +79,7 @@ class Datalist extends Component {
       render: (text) => {
         let status = text;
         statusAry.forEach((item) => {
-          if (item.ibm === text) {
+          if (item.ibm.toString() === text.toString()) {
             status = item.note;
           }
         });
@@ -151,6 +151,11 @@ class Datalist extends Component {
     }).catch((error) => {
       message.error(error);
     });
+  }
+
+  // 添加完毕后刷新列表(假装自己有数据库)
+  reloadTable = (type) => {
+    this.fetchTableData(type);
   }
 
   render() {
