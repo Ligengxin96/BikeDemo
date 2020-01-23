@@ -1,6 +1,6 @@
 import CityManage from '../../../routes/Admin/CityManage';
 
-const prefix = 'admin';
+const prefix = '/admin';
 
 export default [
   {

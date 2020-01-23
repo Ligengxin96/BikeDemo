@@ -1,6 +1,6 @@
 import OrderManage from '../../../routes/Admin/OrderManage';
 
-const prefix = 'admin';
+const prefix = '/admin';
 
 export default [
   {
