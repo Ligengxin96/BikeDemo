@@ -12,9 +12,9 @@ class FinishOrderBtn extends Component {
   // 弹框确认按钮事件
   handleOk = () => {
     fetchOperationStatus({}).then((response) => {
-      const { code = 0 } = response;
+      const { code = 0, note = '' } = response;
       if (code > 0) {
-        message.success('操作成功');
+        message.success(note);
       }
       const { reloadTable } = this.props;
       // 最后关闭弹窗
