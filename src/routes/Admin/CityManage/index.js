@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import CityManageComponent from '../../components/CityManage';
+import CityManageComponent from '../../../components/Admin/CityManage';
 
 class CityManage extends Component {
   render() {

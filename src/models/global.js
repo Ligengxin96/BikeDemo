@@ -12,7 +12,7 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
       history.listen(({ pathname }) => {
-        const ignorePath = ['/home', '/admin/form/register', '/admin/form/login'];
+        const ignorePath = ['/admin/home', '/admin/form/register', '/admin/form/login'];
         if (!ignorePath.includes(pathname)) {
           dispatch({ type: 'checkAuth' }); // 每次访问新路由的时候,检查用户信息是否过期
         }

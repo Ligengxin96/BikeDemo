@@ -66,14 +66,14 @@ class LeftNav extends Component {
   // 菜单点击回调
   handleClick = (e) => {
     const { dispatch } = this.props;
-    const url = lodash.get(e, 'key', '/home');
+    const url = lodash.get(e, 'key', '/admin/home');
     const title = lodash.get(e, 'item.props.title', '首页');
     const menuTitle = {
       url,
       title,
     };
     // 如果点击了首页 收起别的展开菜单 不然样式有点难看
-    if (e.key === '/home') {
+    if (e.key === '/admin/home') {
       this.setState({
         openKeys: [],
       });

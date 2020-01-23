@@ -3,7 +3,7 @@ const Base64 = require('js-base64').Base64;
 const menuList = [
   {
     title: '首页',
-    key: '/home',
+    key: '/admin/home',
   },
   {
     title: 'UI',
@@ -77,11 +77,11 @@ const menuList = [
   },
   {
     title: '城市管理',
-    key: '/cityManage',
+    key: '/admin/cityManage',
   },
   {
     title: '订单管理',
-    key: '/orderManage',
+    key: '/admin/orderManage',
     btnList: [
       {
         title: '订单详情',
@@ -95,11 +95,11 @@ const menuList = [
   },
   {
     title: '员工管理',
-    key: '/user',
+    key: '/admin/user',
   },
   {
     title: '车辆地图',
-    key: '/bikeMap',
+    key: '/admin/bikeMap',
   },
   {
     title: '图表',
@@ -121,7 +121,7 @@ const menuList = [
   },
   {
     title: '权限设置',
-    key: '/permission',
+    key: '/admin/permission',
   },
 ];
 export default menuList;

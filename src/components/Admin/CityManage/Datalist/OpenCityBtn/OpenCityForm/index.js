@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Select, Cascader } from 'antd';
-import { getDictionary } from '../../../../../utils/common';
-import cascaderDatas from '../../../../../assets/config/cascaderDatas';
+import { getDictionary } from '../../../../../../utils/common';
+import cascaderDatas from '../../../../../../assets/config/cascaderDatas';
 
 const FormItem = Form.Item;
 const Option = Select.Option;

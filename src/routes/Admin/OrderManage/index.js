@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import OrderManageComponent from '../../components/OrderManage';
+import OrderManageComponent from '../../../components/Admin/OrderManage';
 
 class OrderManage extends Component {
   render() {

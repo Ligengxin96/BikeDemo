@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button, message } from 'antd';
 import FinishOrderForm from './FinishOrderForm';
-import MyModal from '../../../../myComponents/myModal';
-import { fetchOperationStatus } from '../../../../../services/common';
+import MyModal from '../../../../../myComponents/myModal';
+import { fetchOperationStatus } from '../../../../../../services/common';
 
 class FinishOrderBtn extends Component {
   state={

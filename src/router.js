@@ -18,18 +18,18 @@ function RouterConfig({ history }) {
           <Switch>
             <Route path="/login" component={Login} />
             <Route
-              path="/"
+              path="/admin"
               render={() => {
                 return (
                   <Admin>
+                    <Route path="/admin/home" component={Home} />
                     <Switch>
-                      <Route path="/home" component={Home} />
                       {
                         routes.map((item) => {
                           return <Route path={item.path} component={item.component} />;
                         })
                       }
-                      <Redirect to="/home" />
+                      <Redirect to="/admin/home" />
                     </Switch>
                   </Admin>
                 );

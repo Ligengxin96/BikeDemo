@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Card, message } from 'antd';
-import CrossPageSelectTable from '../../myComponents/myTable/CrossPageSelectTable';
+import CrossPageSelectTable from '../../../myComponents/myTable/CrossPageSelectTable';
 import OpenCityBtn from './OpenCityBtn';
-import { fetchOpenCity } from '../../../services/cityManage';
-import { getDictionary } from '../../../utils/common';
-import styles from '../../../style/common.less';
+import { fetchOpenCity } from '../../../../services/cityManage';
+import { getDictionary } from '../../../../utils/common';
+import styles from '../../../../style/common.less';
 
 class Datalist extends Component {
   state={

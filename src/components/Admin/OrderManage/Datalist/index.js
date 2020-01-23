@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Moment from 'moment';
 import { Card, Table, message } from 'antd';
 import DetailAndFinishBtn from './DetailAndFinishBtn';
-import { fetchOrderList } from '../../../services/example'; // mock.yonyoucloud.com这个网站同样的返回值写法,不支持正则(加了转义字符直接报错)
-import { getDictionary } from '../../../utils/common';
-import styles from '../../../style/common.less';
+import { fetchOrderList } from '../../../../services/example'; // mock.yonyoucloud.com这个网站同样的返回值写法,不支持正则(加了转义字符直接报错)
+import { getDictionary } from '../../../../utils/common';
+import styles from '../../../../style/common.less';
 
 class Datalist extends Component {
   state={

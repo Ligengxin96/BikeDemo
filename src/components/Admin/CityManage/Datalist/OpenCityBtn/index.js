@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import lodash from 'lodash';
 import { Button, message } from 'antd';
-import MyModal from '../../../myComponents/myModal';
+import MyModal from '../../../../myComponents/myModal';
 import OpenCityForm from './OpenCityForm';
 
 class OpenCityBtn extends Component {

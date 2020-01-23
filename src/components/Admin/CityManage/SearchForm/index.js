@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Form, Button, Select } from 'antd';
-import { getDictionary } from '../../../utils/common';
-import styles from '../../../style/common.less';
+import { getDictionary } from '../../../../utils/common';
+import styles from '../../../../style/common.less';
 
 const FormItem = Form.Item;
 const Option = Select.Option;

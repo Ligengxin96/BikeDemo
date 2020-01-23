@@ -75,7 +75,7 @@ class Header extends Component {
 
   render() {
     const { time, weather } = this.state;
-    const { url = '/home', title = '首页' } = lodash.get(this.props, 'menuTitle', {});
+    const { url = '/admin/home', title = '首页' } = lodash.get(this.props, 'menuTitle', {});
     const { city = '北京', name } = lodash.get(this.props, 'userModel.user', {});
     return (
       <div style={{ backgroundColor: '#fff' }}>

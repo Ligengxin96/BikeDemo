@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import OrderDetailBtn from './OrderDetailBtn';
 import FinishOrderBtn from './FinishOrderBtn';
-import styles from '../../../../style/common.less';
+import styles from '../../../../../style/common.less';
 
 class DetailAndFinish extends Component {
   render() {
