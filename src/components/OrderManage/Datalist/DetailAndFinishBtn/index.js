@@ -5,13 +5,13 @@ import styles from '../../../../style/common.less';
 
 class DetailAndFinish extends Component {
   render() {
-    const { selectedRowKeys = [], reloadTable } = this.props;
+    const { selectedRows = [], reloadTable } = this.props;
     return (
       <div className={styles.btnList} style={{ marginBottom: '1rem' }}>
         {/* 订单详细按钮 */}
-        <OrderDetailBtn selectedRowKeys={selectedRowKeys} />
+        <OrderDetailBtn selectedRows={selectedRows} />
         {/* 结束订单按钮 */}
-        <FinishOrderBtn selectedRowKeys={selectedRowKeys} reloadTable={reloadTable} />
+        <FinishOrderBtn selectedRows={selectedRows} reloadTable={reloadTable} />
       </div>
     );
   }

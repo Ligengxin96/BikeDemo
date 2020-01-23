@@ -15,7 +15,10 @@ class Datalist extends Component {
       pageSize: 7,
       total: 0,
     },
-    selectedRowKeys: [],
+    selectDatas: {
+      selectedRowKeys: [],
+      selectedRows: [],
+    },
   }
 
   componentDidMount() {
@@ -111,17 +114,29 @@ class Datalist extends Component {
   }
 
   // 添加完毕后刷新列表(假装自己有数据库)
-  reloadTable = (type) => {
-    this.fetchTableData(type);
+  reloadTable = () => {
+    this.fetchTableData();
+    // 重置勾选状态
+    this.setState({
+      selectDatas: {
+        selectedRowKeys: [],
+        selectedRows: [],
+      },
+    });
   }
 
   // (单)多选框勾选框回调
-  handleSelectChange = (selectedRowKeys) => {
-    this.setState({ selectedRowKeys });
+  handleSelectChange = (selectedRowKeys, selectedRows) => {
+    this.setState({
+      selectDatas: {
+        selectedRowKeys,
+        selectedRows,
+      },
+    });
   }
 
   render() {
-    const { loading, dataSource, pagination, selectedRowKeys } = this.state;
+    const { loading, dataSource, pagination, selectDatas } = this.state;
     const { searchFormValue } = this.props;
     const filterKeys = Object.keys(searchFormValue);
     let tempAry = dataSource;
@@ -153,7 +168,7 @@ class Datalist extends Component {
       columns: this.getColumns(),
       rowSelection: {
         type: 'radio',
-        selectedRowKeys,
+        ...selectDatas,
         onChange: this.handleSelectChange,
       },
       pagination: {
@@ -166,7 +181,7 @@ class Datalist extends Component {
     return (
       <Card className={styles.myCard}>
         {/* 订单详情和结束订单按钮 */}
-        <DetailAndFinishBtn selectedRowKeys={selectedRowKeys} reloadTable={this.reloadTable} />
+        <DetailAndFinishBtn selectedRows={selectDatas.selectedRows} reloadTable={this.reloadTable} />
         {/* 表格部分 */}
         <Table {...tableProps} />
       </Card>

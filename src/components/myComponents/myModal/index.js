@@ -40,11 +40,11 @@ class MyModal extends Component {
   }
 
   renderFooter() {
-    const { disabled = false, loading = false, onOk, onCancel } = this.props;
+    const { disabled = false, loading = false, onOk, okText, cancelText, onCancel } = this.props;
     return (
       <div style={{ textAlign: 'center' }}>
-        { onOk && <Button type="primary" onClick={this.onOk} loading={loading} disabled={disabled}>确&nbsp;定</Button>}
-        { onCancel && <Button onClick={this.onCancel}>取&nbsp;消</Button>}
+        { onOk && <Button type="primary" onClick={this.onOk} loading={loading} disabled={disabled}>{okText || '确 定'}</Button>}
+        { onCancel && <Button onClick={this.onCancel}>{cancelText || '取 消'}</Button>}
       </div>
     );
   }

@@ -33,10 +33,12 @@ class OpenCityBtn extends Component {
       }
     });
   }
+
   // 开通城市按钮事件
   handleOpenModal = () => {
     this.setState({ visible: true });
   }
+
   // 关闭弹框
   handleCloseModal = () => {
     this.setState({ visible: false });

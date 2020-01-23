@@ -20,6 +20,8 @@ module.exports = {
         endTime: '@datetime',
         'shouldPay|1-2.1': 1,
         'userPay|1-2.1': 1,
+        'battery|0-100': 1,
+        position: '@county(true)',
       }],
     }));
   },
