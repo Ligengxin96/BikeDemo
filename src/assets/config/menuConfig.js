@@ -95,7 +95,7 @@ const menuList = [
   },
   {
     title: '员工管理',
-    key: '/admin/user',
+    key: '/admin/staffManage',
   },
   {
     title: '车辆地图',

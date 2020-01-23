@@ -112,6 +112,7 @@ class EditableTable extends Component {
         };
       });
       columns.push({
+        width: '7rem',
         title: '操作',
         dataIndex: 'operation',
         render: (text, record) => {

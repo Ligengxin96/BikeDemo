@@ -9,7 +9,7 @@ class OrderManage extends Component {
       <React.Fragment>
         {/* 头部搜索栏 */}
         <SearchForm dispatch={dispatch} />
-        {/* 开通城市按钮和数据列表 */}
+        {/* 操作按钮和数据列表 */}
         <Datalist searchFormValue={searchFormValue} />
       </React.Fragment>
     );

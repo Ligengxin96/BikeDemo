@@ -25,7 +25,7 @@ class Datalist extends Component {
     this.fetchTableData();
   }
 
-  // 获取按钮编辑表格数据
+  // 获取表格数据
   fetchTableData = () => {
     const { pagination } = this.state;
     this.setState({ loading: true });
