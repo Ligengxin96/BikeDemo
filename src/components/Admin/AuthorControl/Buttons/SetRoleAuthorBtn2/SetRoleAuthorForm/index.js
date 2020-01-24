@@ -1,62 +1,10 @@
 import React, { Component } from 'react';
 import lodash from 'lodash';
-import difference from 'lodash/difference';
-import { Form, Input, Transfer, Table, message } from 'antd';
+import { Form, Input, Transfer, message } from 'antd';
 import { getDictionary } from '../../../../../../utils/common';
 import { fetchStaff } from '../../../../../../services/staff';
 
 const FormItem = Form.Item;
-
-/**
- * TableTransfer 把表格封装进穿梭框 实现分页
- */
-const TableTransfer = ({ leftColumns, rightColumns, ...restProps }) => (
-  <Transfer {...restProps} showSearch showSelectAll={false}>
-    {({
-          direction,
-          filteredItems,
-          onItemSelectAll,
-          onItemSelect,
-          selectedKeys: listSelectedKeys,
-          disabled: listDisabled,
-        }) => {
-          const columns = direction === 'left' ? leftColumns : rightColumns;
-
-          const rowSelection = {
-            getCheckboxProps: item => ({ disabled: listDisabled || item.disabled }),
-            onSelectAll(selected, selectedRows) {
-              const treeSelectedKeys = selectedRows
-                .filter(item => !item.disabled)
-                .map(({ key }) => key);
-              const diffKeys = selected
-                ? difference(treeSelectedKeys, listSelectedKeys)
-                : difference(listSelectedKeys, treeSelectedKeys);
-              onItemSelectAll(diffKeys, selected);
-            },
-            onSelect({ key }, selected) {
-              onItemSelect(key, selected);
-            },
-            selectedRowKeys: listSelectedKeys,
-          };
-
-          return (
-            <Table
-              rowSelection={rowSelection}
-              columns={columns}
-              dataSource={filteredItems}
-              size="small"
-              style={{ pointerEvents: listDisabled ? 'none' : null }}
-              onRow={({ key, disabled: itemDisabled }) => ({
-                onClick: () => {
-                  if (itemDisabled || listDisabled) return;
-                  onItemSelect(key, !listSelectedKeys.includes(key));
-                },
-              })}
-            />
-          );
-        }}
-  </Transfer>
-);
 
 class SetRoleAuthorForm extends Component {
   state={
@@ -120,12 +68,6 @@ class SetRoleAuthorForm extends Component {
       labelCol: { xs: 24, sm: 4 }, // label的col值(一般是文字标题如 密码)
       wrapperCol: { xs: 24, sm: 20 }, // label 后面组件的col值 (如 密码的Input组件)
     };
-    const tableColumns = [
-      {
-        dataIndex: 'username',
-        title: '姓名',
-      },
-    ];
     return (
       <React.Fragment>
         <Form ayout="horizontal">
@@ -139,7 +81,7 @@ class SetRoleAuthorForm extends Component {
           </FormItem>
 
           <FormItem label="选择用户" {...formItemLayout}>
-            <TableTransfer
+            <Transfer
               showSearch
               dataSource={dataSource}
               titles={['待选用户', '已选用户']}
@@ -147,9 +89,8 @@ class SetRoleAuthorForm extends Component {
               filterOption={this.filterOption}
               targetKeys={targetKeys}
               onChange={this.handleChange}
-              leftColumns={tableColumns}
-              rightColumns={tableColumns}
-              listStyle={{ height: '35rem' }}
+              render={item => item.username} // 需要显示的字段名(这里username 对应显示的名字)
+              listStyle={{ width: 200, height: 400 }}
             />
           </FormItem>
 

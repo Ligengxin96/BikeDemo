@@ -96,10 +96,6 @@ class SetAuthorForm extends Component {
           <FormItem label="角色名称" help="" {...formItemLayout}>
             {
               getFieldDecorator('roleName', {
-                rules: [{
-                  required: true,
-                  message: '角色名称不能为空',
-                }],
                 initialValue: this.getRoleName(lodash.get(this.props, 'selectedRows[0].roleName', '')),
               })(<Input placeholder="请输入" style={{ width: '12rem' }} disabled />)
             }
@@ -108,10 +104,6 @@ class SetAuthorForm extends Component {
           <FormItem label="状态" help="" {...formItemLayout}>
             {
               getFieldDecorator('authorOpenStatus', {
-                rules: [{
-                  required: true,
-                  message: '状态不能为空',
-                }],
                 initialValue: lodash.get(this.props, 'selectedRows[0].useStatus', 1),
               })( // eslint-disable-line
                 <Select placeholder="请选择" style={{ width: '12rem' }}>
