@@ -66,7 +66,7 @@ class Datalist extends Component {
       title: '性别',
       dataIndex: 'sex',
       editable: true,
-      render: (text) => { return text.toString() === 1 ? '男' : '女'; },
+      render: (text) => { return text.toString() === '1' ? '男' : '女'; },
     }, {
       title: '是否单身',
       dataIndex: 'isSingle',
