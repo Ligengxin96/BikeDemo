@@ -99,7 +99,7 @@ class SetRoleAuthorForm extends Component {
 
 
   // 搜索过滤函数
-  filterOption = (inputValue, option) => option.description.indexOf(inputValue) > -1;
+  filterOption = (inputValue, option) => option.username.indexOf(inputValue) > -1;
 
   // 查找字典翻译角色名称
   getRoleName = (role) => {
