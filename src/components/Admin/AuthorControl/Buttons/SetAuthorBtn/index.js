@@ -19,7 +19,7 @@ class SetAuthorBtn extends Component {
 
   // 弹框确认按钮点击事件
   handleOk = () => {
-    message.info('操作成功');
+    message.success('操作成功');
     this.setState({ visible: false });
   }
 
