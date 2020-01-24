@@ -4,7 +4,7 @@ import { Button, message } from 'antd';
 import SetRoleAuthorForm from './SetRoleAuthorForm';
 import MyModal from '../../../../myComponents/myModal';
 
-class CreateStaffBtn extends Component {
+class SetRoleAuthorBtn extends Component {
   state={
     visible: false,
   }
@@ -35,8 +35,12 @@ class CreateStaffBtn extends Component {
   }
 
   // 用户授权按钮点击事件
-  handleOpenModal = () => {
-    this.setState({ visible: true });
+  handleOpenModal = (selectedRows) => {
+    if (selectedRows.length > 0) {
+      this.setState({ visible: true });
+    } else {
+      message.info('请选择一个角色');
+    }
   }
 
   // 关闭弹框
@@ -46,16 +50,17 @@ class CreateStaffBtn extends Component {
 
   render() {
     const { visible } = this.state;
+    const { selectedRows } = this.props;
     const modalProps = {
       width: '35rem',
-      title: '创建角色',
+      title: '用户授权',
       visible,
       onOk: this.handleOk,
       onCancel: this.handleCloseModal,
     };
     return (
       <React.Fragment>
-        <Button type="primary" onClick={this.handleOpenModal}>用户授权</Button>
+        <Button type="primary" onClick={() => this.handleOpenModal(selectedRows)}>用户授权</Button>
         <MyModal {...modalProps}>
           {/* 用户授权弹框内容 */}
           <SetRoleAuthorForm ref={(form) => { this.setRoleAuthorForm = form; }} />
@@ -65,4 +70,4 @@ class CreateStaffBtn extends Component {
   }
 }
 
-export default CreateStaffBtn;
+export default SetRoleAuthorBtn;

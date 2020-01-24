@@ -13,8 +13,14 @@ class SetAuthorBtn extends Component {
     if (selectedRows.length > 0) {
       this.setState({ visible: true });
     } else {
-      message.info('请选择一个员工');
+      message.info('请选择一个角色');
     }
+  }
+
+  // 弹框确认按钮点击事件
+  handleOk = () => {
+    message.info('操作成功');
+    this.setState({ visible: false });
   }
 
   // 关闭弹框
@@ -29,8 +35,8 @@ class SetAuthorBtn extends Component {
       width: '35rem',
       title: '设置权限',
       visible,
+      onOk: this.handleOk,
       onCancel: this.handleCloseModal,
-      footer: null,
     };
     return (
       <React.Fragment>

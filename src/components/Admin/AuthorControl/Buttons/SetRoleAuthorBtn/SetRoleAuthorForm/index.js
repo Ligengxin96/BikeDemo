@@ -5,7 +5,7 @@ import { getDictionary } from '../../../../../../utils/common';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class CreateStaffForm extends Component {
+class SetRoleAuthorForm extends Component {
   render() {
     const { form: { getFieldDecorator } } = this.props;
     const roleAry = getDictionary('role');
@@ -62,4 +62,4 @@ class CreateStaffForm extends Component {
   }
 }
 
-export default Form.create()(CreateStaffForm);
+export default Form.create()(SetRoleAuthorForm);
