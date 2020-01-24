@@ -21,7 +21,9 @@ class SetAuthorForm extends Component {
 
   // 获取角色权限树数据
   fetchAuthorTreeData = () => {
-    fetchRoleAuthorTree({}).then((response) => {
+    fetchRoleAuthorTree({
+      type: lodash.get(this.props, 'selectedRows[0].roleName', ''),
+    }).then((response) => {
       const { code = 0, result = [] } = response;
       if (code > 0) {
         this.setState({

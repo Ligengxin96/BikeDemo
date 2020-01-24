@@ -103,10 +103,10 @@ export default[
       note: '客服专员',
     }, {
       ibm: 3,
-      note: '人力专员',
+      note: '财务专员',
     }, {
       ibm: 4,
-      note: '财务专员',
+      note: '人力专员',
     }, {
       ibm: 5,
       note: '市场专员',
