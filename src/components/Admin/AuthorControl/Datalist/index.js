@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Moment from 'moment';
 import { message } from 'antd';
-import EdiTable from '../../../myComponents/myTable/EdiTable';
-import { fetchStaff } from '../../../../services/staff';
+import CrossPageSelectTable from '../../../myComponents/myTable/CrossPageSelectTable';
+import { fetchRole } from '../../../../services/author';
 import { fetchOperationStatus } from '../../../../services/common';
 import { getDictionary } from '../../../../utils/common';
 
@@ -29,7 +28,7 @@ class Datalist extends Component {
   fetchTableData = (num = 0) => {
     const { pagination } = this.state;
     this.setState({ loading: true });
-    fetchStaff({
+    fetchRole({
       type: num + 1,
     }).then((response) => {
       const { code = 0, result = [], total = 0 } = response;
@@ -50,51 +49,46 @@ class Datalist extends Component {
   }
 
   getColumns = () => {
-    const statusAry = getDictionary('status');
-    const columns = [{
-      title: 'id',
-      dataIndex: 'id',
-    }, {
-      title: '姓名',
-      dataIndex: 'username',
-      editable: true,
-    }, {
-      title: '年龄',
-      dataIndex: 'age',
-      editable: true,
-    }, {
-      title: '性别',
-      dataIndex: 'sex',
-      editable: true,
-      render: (text) => { return text.toString() === '1' ? '男' : '女'; },
-    }, {
-      title: '是否单身',
-      dataIndex: 'isSingle',
-      editable: true,
-      render: (text) => { return text.toString() === '1' ? '是' : '否'; },
-    }, {
-      title: '状态',
-      dataIndex: 'status',
-      editable: true,
-      render: (text) => {
-        let status = text;
-        statusAry.forEach((item) => {
-          if (item.ibm.toString() === text.toString()) {
-            status = item.note;
-          }
-        });
-        return status;
+    const roleAry = getDictionary('role');
+    const authorOpenStatusAry = getDictionary('authorOpenStatus');
+    const columns = [
+      {
+        title: '角色ID',
+        dataIndex: 'id',
+      }, {
+        title: '角色名称',
+        dataIndex: 'roleName',
+        render: (text) => {
+          let roleName = text;
+          roleAry.forEach((item) => {
+            if (item.ibm === text) {
+              roleName = item.note;
+            }
+          });
+          return roleName;
+        },
+      }, {
+        title: '创建时间',
+        dataIndex: 'createTime',
+      }, {
+        title: '使用状态',
+        dataIndex: 'useStatus',
+        render: (text) => {
+          let useStatus = text;
+          authorOpenStatusAry.forEach((item) => {
+            if (item.ibm === text) {
+              useStatus = item.note;
+            }
+          });
+          return useStatus;
+        },
+      }, {
+        title: '授权时间',
+        dataIndex: 'authorTime',
+      }, {
+        title: '授权人',
+        dataIndex: 'operator',
       },
-    }, {
-      title: '生日',
-      dataIndex: 'birthday',
-      editable: true,
-      render: (text) => { return Moment(text).format('YYYY-MM-DD'); },
-    }, {
-      title: '联系地址',
-      dataIndex: 'address',
-      editable: true,
-    },
     ];
     return columns;
   }
@@ -179,7 +173,7 @@ class Datalist extends Component {
       handleUpdate: this.handleEdiTableUpdate,
     };
     return (
-      <EdiTable {...tableProps} />
+      <CrossPageSelectTable {...tableProps} />
     );
   }
 }

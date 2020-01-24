@@ -28,7 +28,7 @@ class FinishOrderBtn extends Component {
     });
   }
 
-  // 结束订单按钮事件
+  // 结束订单按钮点击事件
   handleOpenModal = (selectedRows) => {
     if (selectedRows.length > 0) {
       this.setState({ visible: true });

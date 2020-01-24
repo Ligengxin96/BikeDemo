@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import lodash from 'lodash';
 import { Button, message } from 'antd';
+import SetRoleAuthorForm from './SetRoleAuthorForm';
 import MyModal from '../../../../myComponents/myModal';
-import OpenCityForm from './OpenCityForm';
 
-class OpenCityBtn extends Component {
+class CreateStaffBtn extends Component {
   state={
     visible: false,
   }
 
-  // 弹框确认按钮点击事件
+  // 弹框确认按钮事件
   handleOk = () => {
     const { reloadTable } = this.props;
-    const { validateFieldsAndScroll } = this.openCityForm;
+    const { validateFieldsAndScroll } = this.setRoleAuthorForm;
     validateFieldsAndScroll((error) => {
       if (error) {
         const key = Object.keys(error);
@@ -34,7 +34,7 @@ class OpenCityBtn extends Component {
     });
   }
 
-  // 开通城市按钮事件
+  // 用户授权按钮点击事件
   handleOpenModal = () => {
     this.setState({ visible: true });
   }
@@ -47,21 +47,22 @@ class OpenCityBtn extends Component {
   render() {
     const { visible } = this.state;
     const modalProps = {
-      width: '25rem',
-      title: '开通城市',
+      width: '35rem',
+      title: '创建角色',
       visible,
       onOk: this.handleOk,
       onCancel: this.handleCloseModal,
     };
     return (
       <React.Fragment>
-        <Button type="primary" onClick={this.handleOpenModal} style={{ marginBottom: '1rem' }}>开通城市</Button>
-        <MyModal {...modalProps} >
-          {/* 弹框内部组件 */}
-          <OpenCityForm ref={(form) => { this.openCityForm = form; }} />
+        <Button type="primary" onClick={this.handleOpenModal}>用户授权</Button>
+        <MyModal {...modalProps}>
+          {/* 用户授权弹框内容 */}
+          <SetRoleAuthorForm ref={(form) => { this.setRoleAuthorForm = form; }} />
         </MyModal>
       </React.Fragment>
     );
   }
 }
-export default OpenCityBtn;
+
+export default CreateStaffBtn;

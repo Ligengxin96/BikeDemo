@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Button, message } from 'antd';
-import StaffDetailForm from './StaffDetailForm';
+import SetAuthorForm from './SetAuthorForm';
 import MyModal from '../../../../myComponents/myModal';
 
-class StaffDetailBtn extends Component {
+class SetAuthorBtn extends Component {
   state={
     visible: false,
   }
 
-  // 员工详情按钮点击事件
+  // 设置权限按钮点击事件
   handleOpenModal = (selectedRows) => {
     if (selectedRows.length > 0) {
       this.setState({ visible: true });
@@ -26,22 +26,22 @@ class StaffDetailBtn extends Component {
     const { visible } = this.state;
     const { selectedRows = [] } = this.props;
     const modalProps = {
-      width: '25rem',
-      title: '员工详情',
+      width: '35rem',
+      title: '设置权限',
       visible,
       onCancel: this.handleCloseModal,
       footer: null,
     };
     return (
       <React.Fragment>
-        <Button onClick={() => this.handleOpenModal(selectedRows)}>员工详情</Button>
+        <Button type="primary" onClick={() => this.handleOpenModal(selectedRows)}>设置权限</Button>
         <MyModal {...modalProps}>
-          {/* 员工详情弹框内容 */}
-          <StaffDetailForm selectedRows={selectedRows} />
+          {/* 设置权限弹框内容 */}
+          <SetAuthorForm selectedRows={selectedRows} />
         </MyModal>
       </React.Fragment>
     );
   }
 }
 
-export default StaffDetailBtn;
+export default SetAuthorBtn;

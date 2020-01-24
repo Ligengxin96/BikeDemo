@@ -6,6 +6,7 @@ import echartsRoutes from './Echarts';
 import cityManageRoutes from './CityManage';
 import orderManageRoutes from './OrderManage';
 import staffManageRoutes from './StaffManage';
+import authorControlRoutes from './AuthorControl';
 
 
 export default [
@@ -16,5 +17,6 @@ export default [
   ...echartsRoutes, // 图表部分路由
   ...cityManageRoutes, // 城市管理部分路由
   ...orderManageRoutes, // 订单管理部分路由
-  ...staffManageRoutes, // 人员部分路由
+  ...staffManageRoutes, // 人员管理部分路由
+  ...authorControlRoutes, // 权限管理部分路由
 ];

@@ -9,7 +9,7 @@ class CreateStaffBtn extends Component {
     visible: false,
   }
 
-  // 弹框确认按钮事件
+  // 弹框确认按钮点击事件
   handleOk = () => {
     const { reloadTable } = this.props;
     const { validateFieldsAndScroll } = this.createStaffForm;
@@ -34,7 +34,7 @@ class CreateStaffBtn extends Component {
     });
   }
 
-  // 员创建员工按钮点击事件
+  // 创建员工按钮点击事件
   handleOpenModal = () => {
     this.setState({ visible: true });
   }

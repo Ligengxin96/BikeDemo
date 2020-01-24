@@ -22,6 +22,7 @@ class Line extends Component {
         axisPointer: {
           type: 'cross',
           label: {
+            precision: '0', // 显示Y轴的数值不为小数点
             backgroundColor: '#6a7985',
           },
         },
@@ -67,6 +68,7 @@ class Line extends Component {
         axisPointer: {
           type: 'cross',
           label: {
+            precision: '0', // 显示Y轴的数值不为小数点
             backgroundColor: '#6a7985',
           },
         },
@@ -126,6 +128,7 @@ class Line extends Component {
         axisPointer: {
           type: 'cross',
           label: {
+            precision: '0', // 显示Y轴的数值不为小数点
             backgroundColor: '#6a7985',
           },
         },

@@ -83,4 +83,33 @@ export default[
       note: '已结束',
     }],
   },
+  // 权限状态
+  {
+    authorOpenStatus: [{
+      ibm: 1,
+      note: '开启',
+    }, {
+      ibm: 2,
+      note: '关闭',
+    }],
+  },
+  // 角色
+  {
+    role: [{
+      ibm: 1,
+      note: '管理人员',
+    }, {
+      ibm: 2,
+      note: '客服专员',
+    }, {
+      ibm: 3,
+      note: '人力专员',
+    }, {
+      ibm: 4,
+      note: '财务专员',
+    }, {
+      ibm: 5,
+      note: '市场专员',
+    }],
+  },
 ];
