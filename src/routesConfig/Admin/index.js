@@ -7,6 +7,7 @@ import cityManageRoutes from './CityManage';
 import orderManageRoutes from './OrderManage';
 import staffManageRoutes from './StaffManage';
 import authorControlRoutes from './AuthorControl';
+import bikeMbapRoutes from './BikeMap';
 
 
 export default [
@@ -19,4 +20,5 @@ export default [
   ...orderManageRoutes, // 订单管理部分路由
   ...staffManageRoutes, // 人员管理部分路由
   ...authorControlRoutes, // 权限管理部分路由
+  ...bikeMbapRoutes, // 车辆地图部分路由
 ];

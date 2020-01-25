@@ -4,6 +4,7 @@ import orderManage from './orderManage';
 import common from './common';
 import staff from './staff';
 import author from './author';
+import bike from './bike';
 
 const getApis = () => {
   const apis = { // apis: 数据类型对象数组 { [], ... }
@@ -13,6 +14,7 @@ const getApis = () => {
     common, // 通用接口
     staff, // 员工管理接口
     author, // 权限管理接口
+    bike, // 车辆地图接口
   };
   const api = {};
   const apisKey = Object.keys(apis) || [];
