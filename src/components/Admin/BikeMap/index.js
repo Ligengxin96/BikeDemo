@@ -74,7 +74,7 @@ class BikeMap extends Component {
         {/* 头部搜索栏 */}
         <SearchForm dispatch={dispatch} />
         {/* 地图部分 */}
-        <Card className={styles.myCard}>
+        <Card title="服务区车辆分布" className={styles.myCard}>
           <h2 style={{ marginButtom: '1rem' }}>共{total}辆车</h2>
           <div style={{ width: '100%', height: '35rem' }} >
             <Map center={this.mapCenter} zoom={13}>

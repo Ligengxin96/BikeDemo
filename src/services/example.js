@@ -7,3 +7,7 @@ export function fetchUser() {
 export function fetchOrderList() {
   return request('/api/order');
 }
+
+export function fetchOrderDetail() {
+  return request('/api/orderDetail');
+}
