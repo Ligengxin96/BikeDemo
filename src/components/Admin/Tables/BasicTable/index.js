@@ -129,6 +129,7 @@ class BasicTable extends Component {
         fixed: 'left',
         title: '姓名',
         dataIndex: 'username',
+        width: 100,
       },
       {
         fixed: 'left',
@@ -136,6 +137,7 @@ class BasicTable extends Component {
         dataIndex: 'age',
         sorter: (a, b) => a.age - b.age,
         sortOrder: sortedInfo.columnKey === 'age' && sortedInfo.order,
+        width: 100,
       },
       {
         title: '性别',
@@ -173,6 +175,7 @@ class BasicTable extends Component {
         fixed: 'right',
         title: '电子邮箱',
         dataIndex: 'email',
+        width: 300,
       },
     ];
     return columns;
