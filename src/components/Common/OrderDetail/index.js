@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import lodash from 'lodash';
 import { Map, Polygon, Marker, Polyline } from 'react-amap';
-import { Card, message } from 'antd';
+import { Card, Col, message } from 'antd';
 import { fetchOrderDetail } from '../../../services/example';
 import { fetchServiceArea, fetchBikeRoute } from '../../../services/bike';
 import { getDictionary } from '../../../utils/common';
@@ -86,6 +86,18 @@ class OrderDetail extends Component {
     return userBikeModel;
   }
 
+  // 查找字典翻译订单状态
+  getOrderStatus = (status) => {
+    const orderStatusAry = getDictionary('orderStatus');
+    let orderStatus = '--';
+    orderStatusAry.forEach((element) => {
+      if (element.ibm === status) {
+        orderStatus = element.note;
+      }
+    });
+    return orderStatus;
+  }
+
   render() {
     const { serviceArea, bikeRoute, orderDetailInfo } = this.state;
     // react-amap 在github上的如何自定义图标的问题被关闭了一直没有解决,所以这里我也不知道如何自定义图标,如果使用高德官网的原生js 还是可以实现的
@@ -124,16 +136,26 @@ class OrderDetail extends Component {
           </div>
         </Card>
         <Card title="详细信息" className={styles.myCard}>
-          <div style={{ marginLeft: '5rem', fontSize: '1rem' }}>
-            <p><span>用车模式:</span> <span> {this.getUserBikeModel(lodash.get(orderDetailInfo, 'userBikeModel', '0'))}</span></p>
-            <p><span>订单编号:</span> <span> {lodash.get(orderDetailInfo, 'orderId', '--')}</span></p>
-            <p><span>车辆编号:</span> <span> {lodash.get(orderDetailInfo, 'bikeId', '--')}</span></p>
-            <p><span>用户姓名:</span> <span> {lodash.get(orderDetailInfo, 'username', '--')}</span></p>
-            <p><span>手机号码:</span> <span> {lodash.get(orderDetailInfo, 'phone', '--')}</span></p>
-            <p><span>行程起点:</span> <span> {lodash.get(orderDetailInfo, 'startPoint', '--')}</span></p>
-            <p><span>行程终点:</span> <span> {lodash.get(orderDetailInfo, 'endPoint', '--')}</span></p>
-            <p><span>行驶里程:</span> <span> {lodash.get(orderDetailInfo, 'distance', '--')}KM</span></p>
-          </div>
+          <Col span={12}>
+            <div style={{ marginLeft: '5rem', fontSize: '1rem' }}>
+              <p><span>用车模式:</span> <span> {this.getUserBikeModel(lodash.get(orderDetailInfo, 'userBikeModel', '0'))}</span></p>
+              <p><span>用户姓名:</span> <span> {lodash.get(orderDetailInfo, 'username', '--')}</span></p>
+              <p><span>手机号码:</span> <span> {lodash.get(orderDetailInfo, 'phone', '--')}</span></p>
+              <p><span>行程起点:</span> <span> {lodash.get(orderDetailInfo, 'startPoint', '--')}</span></p>
+              <p><span>行程终点:</span> <span> {lodash.get(orderDetailInfo, 'endPoint', '--')}</span></p>
+              <p><span>行驶里程:</span> <span> {lodash.get(orderDetailInfo, 'distance', '--')}KM</span></p>
+            </div>
+          </Col>
+          <Col span={12}>
+            <div style={{ marginLeft: '5rem', fontSize: '1rem' }}>
+              <p><span>订单编号:</span> <span> {lodash.get(orderDetailInfo, 'orderId', '--')}</span></p>
+              <p><span>订单状态:</span> <span> {this.getOrderStatus(lodash.get(orderDetailInfo, 'orderStatus', '0'))}</span></p>
+              <p><span>订单金额:</span> <span> {lodash.get(orderDetailInfo, 'shouldPay', '--')}元</span></p>
+              <p><span>实付金额:</span> <span> {lodash.get(orderDetailInfo, 'userPay', '--')}元</span></p>
+              <p><span>车辆编号:</span> <span> {lodash.get(orderDetailInfo, 'bikeId', '--')}</span></p>
+              <p><span>车辆电量:</span> <span> {lodash.get(orderDetailInfo, 'battery', '--')}%</span></p>
+            </div>
+          </Col>
         </Card>
       </React.Fragment>
     );
