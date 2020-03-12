@@ -6,7 +6,7 @@ export default {
   namespace: 'globalModel',
 
   state: {
-    hasAuth: 0, // 用户是否登录 0.否 | 1.是
+    hasAuth: 1, // 用户是否登录 0.否 | 1.是
   },
 
   subscriptions: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import lodash from 'lodash';
+import debounce from 'lodash/debounce';
 import { routerRedux } from 'dva/router';
 import { Card, Form, Input, Button, message, Icon, Checkbox } from 'antd';
 import styles from '../../../../style/common.less';
@@ -7,8 +8,17 @@ import styles from '../../../../style/common.less';
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
+  constructor() {
+    super();
+    this.onChange = debounce(this.onChange, 1000);
+  }
+
   // 登录按钮点击回调
-  loginSubmit = () => {
+  loginSubmit = (flag) => {
+    if (flag === 1) {
+      message.info('请使用下方的表单登录');
+      return;
+    }
     const { form: { getFieldValue, validateFields }, dispatch, registerInfo } = this.props;
     validateFields((error, values) => {
       if (error) {
@@ -34,6 +44,8 @@ class LoginForm extends React.Component {
             type: 'globalModel/login',
             payload: 1,
           });
+          // 跳转到首页
+          dispatch(routerRedux.push('/admin/home'));
         } else {
           message.info('用户名或者密码不正确');
         }
@@ -41,9 +53,14 @@ class LoginForm extends React.Component {
     });
   }
 
+  // 跳转到注册页面
   gotoRegister = () => {
     const { dispatch } = this.props;
     dispatch(routerRedux.push('/admin/form/register'));
+  }
+
+  onChange = () => {
+    message.info('请使用下方的表单登录');
   }
 
   render() {
@@ -53,13 +70,13 @@ class LoginForm extends React.Component {
         <Card title="登录行内样式表单" className={styles.myCard}>
           <Form layout="inline">
             <FormItem>
-              <Input placeholder="请输入用户名" />
+              <Input placeholder="请输入用户名" onChange={this.onChange} />
             </FormItem>
             <FormItem>
-              <Input placeholder="请输入密码" />
+              <Input placeholder="请输入密码" onChange={this.onChange} />
             </FormItem>
             <FormItem>
-              <Button type="primary">登录</Button>
+              <Button type="primary" onClick={() => this.loginSubmit(1)}>登录</Button>
             </FormItem>
           </Form>
         </Card>
