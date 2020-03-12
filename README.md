@@ -1,6 +1,6 @@
 # BikeDemo
 - master 分支 是用 Create React App 创建的项目(后项目采用dva框架后切换到了dev分支)
-- dev 分支是基于dva框架,使用react,es6和antd组件搭建的项目
+- dev 分支是基于dva框架,使用react,es6,antd,echarts组件搭建的项目(地图组件使用的是高德地图组件react-amap)
 
 ## 项目主要文件夹介绍
 
